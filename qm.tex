@@ -1,0 +1,278 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{yehyun}
+
+\title{Quantum Mechanics Notes}
+\author{Yehyun Choi}
+
+\begin{document}
+
+\maketitle
+\pagebreak 
+
+\section{Formalism}
+\textcolor{red}{PHYS 6572 - Lectures 1-5; Sakurai ch.1}
+
+\textbf{Kets} represent a physical state - atom for example. They are represented by a vector in Hilbert space - a vector space with vectors and complex numbers. One example of such space is the space of square integrable functions, $L_2$. Such space is equipped with/closed under vector addition: $a\ket\alpha+b\ket\beta=\ket\gamma\in V.$ This operation is:
+\begin{enumerate}
+    \item Linear: $(a+b)\ket\alpha=a\ket\alpha+b\ket\alpha$; $a(\ket\alpha+\ket\beta)=a\ket\alpha+a\ket\beta$
+    \item Commutative: $\ket\alpha+\ket\beta=\ket\beta+\ket\alpha$
+    \item Associative: $(\ket\alpha+\ket\beta)+\ket\gamma=\ket\alpha+(\ket\beta+\ket\gamma).$
+\end{enumerate}
+Furthermore, the null vector ($\exists\ket 0$ such that $\ket\alpha+\ket 0=\ket\alpha$) and the inverse vector ($\ket\alpha+\ket{-\alpha}=\ket 0$) exist.
+
+\textbf{Observables} represent a physical quantity - spin of an atom, for example, are represented by an operator. Given an observable, there exists eigenstates that satisfy, for an operator,
+$$A\ket{\alpha'}=\alpha'\ket{\alpha'},\quad A\ket{\alpha''}=\alpha''\ket{\alpha''},$$
+where $\ket{\alpha^{n}}\in H$ are eigenkets and $\alpha^n\in\mathbb C$ are eigenvalues.
+
+Generally, for an ordinary ket $\ket\alpha$ and observable $A$, we have completeness relation: $\ket\alpha=\sum_{\alpha'}c_{\alpha'}\ket{\alpha'}$.
+
+\textbf{Bras} are the dual vector space to kets; there's a correspondance between bra and ket spaces. For example,
+\begin{align*}
+    \ket\alpha,\ket{\alpha'},\ket{\alpha''},\cdots&\longleftrightarrow\bra\alpha,\bra{\alpha'},\bra{\alpha''},\cdots\\
+    \ket\alpha+\ket\beta&\longleftrightarrow\bra\alpha+\bra\beta\\
+    c\ket\alpha&\longleftrightarrow c^*\bra\alpha.
+\end{align*}
+An operator called the \textbf{inner product} exists in $H$; it's given $\braket{\beta}{\alpha}=(\bra\beta)\cdot(\ket\alpha)$. 
+
+There are two postulates regarding the inner product; 
+\begin{enumerate}
+    \item $\braket{\beta}{\alpha}=\braket{\alpha}{\beta}^*$
+    \item $\braket{\alpha}{\alpha}\ge 0$.
+\end{enumerate}
+Furthermore, $\ket\alpha$ and $\ket\beta$ are orthogonal if $\braket{\alpha}{\beta}=0\implies\braket{\beta}{\alpha}=0$. For a nonzero ket, we can also normalize it; $\ket{\tilde\alpha}=\left(\frac 1{\sqrt{\braket\alpha}}\right)\ket\alpha.$
+
+\textbf{Operators} are observables that work on kets. Addition operators are generally commutative, associative, and linear. Furthermore, we have 
+$$X\ket\alpha\longleftrightarrow\bra\alpha X^\dag,$$
+where $X^\dag$ is the Hermitian adjoint; $X$ is Hermitian if $X=X^\dag$.
+
+Multiplication operators are, in gneral,
+\begin{enumerate}
+    \item Noncommutative; $XY\ne YX$
+    \item Associative; $X(YZ)=(XY)Z=XYZ$; $(XY)^\dag=Y^\dag X^\dag$. 
+\end{enumerate}
+The ``associative axioms of multiplication'' are
+\begin{enumerate}
+    \item $\ket\beta\bra\alpha\cdot\ket\gamma=\ket\beta\cdot\braket{\alpha}{\gamma}$.
+    \item $\ket\alpha\longleftrightarrow\bra\alpha$ and $X\ket\alpha\longleftrightarrow\bra\alpha X^\dag$. 
+    
+    Then, $X=\ket\beta\bra\alpha\implies X^\dag=\ket\alpha\bra\beta$ because $\beta\braket\alpha=X\ket\alpha\longleftrightarrow\bra\alpha X^\dag=\braket\alpha\ket\beta$.
+    \item $\bra\beta\cdot X\ket\alpha=\bra\beta X\cdot\ket\alpha=\bra\beta X\ket\alpha$.
+
+    Further, $\bra\beta X\ket\alpha=\bra\beta\cdot X\ket\alpha=\left(\bra\alpha X^\dag\cdot\ket\beta\right)^*=\bra\alpha X^\dag\ket\beta^*.$
+
+    Hence, $X$ is Hermitian iff $\bra\beta X\ket\alpha=\bra\alpha X\ket\beta^*$.
+\end{enumerate}
+
+\proposition{Hermitian $A$ has real, orthogonal eigenvalues.} 
+
+For eigenkets $\alpha'$, $\alpha''$, we have $A\ket{\alpha'}=\alpha'\ket{\alpha'}$ and $\bra{\alpha''}A=a''^*\bra{\alpha''}$. If we multiply by $\bra{\alpha''}$ and $\ket{\alpha'}$ respectively, we get $\bra{\alpha''}A\ket{\alpha'}=\alpha'\braket{\alpha''}{\alpha'}$ and $\bra{\alpha''}A\ket{\alpha'}=\alpha''^*\braket{\alpha''}{\alpha'}$. Subtracting these gives
+$$(\alpha'-\alpha''^*)\braket{\alpha''}{\alpha'}=0.$$
+If $\alpha'=\alpha''$, then $\alpha'=\alpha'^*$ (realness). For $\alpha'\ne\alpha''$, we have $\braket{\alpha''}{\alpha'}=0$ (orthogonality).
+
+
+For a complete set of eigenkets, we can use \textbf{vector expansion}; $\ket\alpha=\sum_{\alpha'}\ket{\alpha'}\braket{\alpha'}{\alpha}$, which is analogous to the familiar form $\mathbf v=\sum\hat{e_i}(\hat{e_i}\cdot\mathbf v)$. This also gives the \textbf{completeness relation}:
+$$\sum_{\alpha'}\ket{\alpha'}\bra{\alpha'}=1.$$
+
+We examine $\braket\alpha$: 
+$$\braket\alpha=\bra\alpha\cdot\left(\sum_{\alpha'}\ket{\alpha'}\bra{\alpha'}\right)\cdot\ket\alpha=\sum_{\alpha'}\abs{\braket{\alpha'}{\alpha}}^2.$$ 
+We say $\ket\alpha$ is \textbf{normalized} if $\braket\alpha=\sum_{\alpha'}\abs{\braket{\alpha'}{\alpha}}^2=1$.
+
+It is often convenient to use \textbf{matrix representation} in quantum mechanics. To motivate, for an operator, we have, from completeness relations, $X=\sum_{a'}\sum_{a''}\ket{a''}\bra{a''}X\ket{a'}\bra{a'}$. From this expression, we define 
+$$X_{ij}=\bra{a^i}X\ket{a^j}\implies X=\begin{pmatrix}\bra{a^1}X\ket{a^1}&\bra{a^1}X\ket{a^2}&\\\bra{a^2}X\ket{a^1}&\bra{a^2}X\ket{a^2}&\\&&\ddots\end{pmatrix}.$$
+With this, we can represent matrix multiplication; for $Z=XY$, 
+$$Z_{ij}=\bra{a''}Z\ket{a'}=\bra{a''}XY\ket{a'}=\sum_{a'''}\bra{a''}X\ket{a'''}\bra{a'''}Y\ket{a'}=X_{ik}Y_{kj}.$$
+In ket notation, if we let $\ket{\gamma}=X\ket a$ and $\braket{a'}{\gamma}=\bra{a'}X\ket{a}=\sum_{a''}\bra{a'}X\ket{a''}\braket{a''}{a}$, which is similar to multiplying a square matrix by a column vector. Hence, we have 
+$$\ket\alpha=\begin{pmatrix}\braket{a^1}{a}\\\braket{a^2}{a}\\\vdots\end{pmatrix},\quad\ket\gamma=\begin{pmatrix}\braket{a^1}{\gamma}\\\braket{a^2}{\gamma}\\\vdots\end{pmatrix}.$$
+Furthermore, for a bra relation, $\bra\gamma=\bra aX,$ we have $\braket\gamma{a'}=\sum_{a''}\braket a{a''}\bra{a''}X\ket{a'}$, which is similar to multiplying a row vector by a square matrix, giving us 
+$$\bra a=\begin{pmatrix}\braket{a^1}{a}^*&\braket{a^2}{a}^*&\hdots\end{pmatrix},\quad\bra\gamma=\begin{pmatrix}\braket{a^1}{\gamma}^*&\braket{a^2}{\gamma}^*&\hdots\end{pmatrix}.$$
+It is easy to see that 
+$$\braket\beta\alpha=\sum_{a'}\braket{\beta}{a'}\braket{a'}\alpha=\begin{pmatrix}\braket{a^1}{\beta}^*&\braket{a^2}{\beta}&\cdots\end{pmatrix}\begin{pmatrix}\braket{a^1}{\alpha}\\\braket{a^2}{\alpha}\\\vdots\end{pmatrix}.$$
+Finally,
+$$\ket\beta\bra\alpha=\begin{pmatrix}\braket{a^1}{\beta}\braket{a^1}{\alpha}^*&\braket{a^1}{\beta}\braket{a^2}{\alpha}^*&\hdots\\\braket{a^2}{\beta}\braket{a^1}{\alpha}^*&\braket{a^2}{\beta}\braket{a^2}{\alpha}^*&\hdots\\\vdots&\vdots&\ddots\end{pmatrix}.$$
+
+We define the \textbf{projection/measurement operator} as $\Lambda_{a'}=\ket{a'}\bra{a'}.$ Using the projection operator, we can write an operator $A$ in terms of its eigenkets; 
+$$A=\sum_{a''}\sum_{a'}\ket{a''}\bra{a''}A\ket{a'}\bra{a'}=\sum_{a'}a'\ket{a'}\bra{a'}=\sum_{a'}a'\Lambda_{a'}.$$
+
+When a \textbf{measurement} is made, $\ket a$ collapses to $\ket{a'}$ - Copenhagen interpretation. Furthermore, the probability for measuring $a'$ is $\abs{\braket{a'}{a}}^2$. 
+
+For an observable, the \textbf{expectation value} is defined
+$$\ev A=\bra\alpha A\ket\alpha=\sum_{a'}\sum_{a''}\braket{\alpha}{a''}\bra{a''}A\ket{a'}\braket{a'}{\alpha}=\sum_{a'}a'\braket{a'}{\alpha}^*\braket{a'}{\alpha}=\sum_{a'}a'\abs{\braket{a'}{\alpha}}^2,$$
+which can be interpreted as the average measured value.
+
+For the \textbf{commutator} defined $\comm{A}{B}=AB-BA$, for compatible observables, we have $\comm{A}{B}=0$, and for incompatible observables, we have $\comm{A}{B}\ne 0$. An observable is \textbf{degenerate} if it has the same eigenvalue for multiple eigenstates.
+
+\theorem{Compatible $\implies$ nondegenerate $\implies$ diagonal matrices}
+
+For compatible observables, $\comm{A}{B}=0\implies\bra{a''}AB-BA\ket{a'}=(a''-a')\bra{a''}B\ket{a'}=0$. Unless $a''=a'$, $\bra{a''}B\ket{a'}=0$, which implies diagonal $B$. Furthermore, since $B$ is diagonal, $\bra{a''}B\ket{a'}=\delta_{a'a''}\bra{a'}B\ket{a''}.$ Using identity relations, 
+\begin{align*}
+    &B=\sum_{a'}\sum_{a''}\ket{a''}\bra{a''}B\ket{a'}\bra{a'}=\sum_{a''}\ket{a''}\bra{a''}B\ket{a''}\bra{a''}\\
+    \implies &B\ket{a'}=\sum_{a''}\ket{a''}\bra{a''}B\ket{a''}\braket{a''}{a'}=(\bra{a'}B\ket{a'})\ket{a'}.
+\end{align*}
+Therefore, $\ket a'$ is an eigenstate of $B$ with eigenvalue $b'=\bra{a'}B\ket{a'}.$
+
+To prove the uncertainty relation, we first introduce three lemmas:
+\textbf{Schwartz Inequality}: $\braket\alpha\braket\beta\ge\abs{\braket{\alpha}{\beta}}^2.$ To prove this, consider the equality 
+$$\left(\bra\alpha+\lambda^*\bra\beta\right)\cdot\left(\ket\alpha+\lambda\ket\beta\right)=\abs{\ket\alpha+\lambda\ket\beta}^2\ge 0,$$
+where $\lambda\in\mathbb C$. If we let $\lambda=-\frac{\braket{\beta}{\alpha}}{\braket\beta}$,
+$$\braket\alpha+\lambda\braket{\alpha}{\beta}+\lambda^*\braket{\beta}{\alpha}+\lambda^*\lambda\braket\beta=\braket\alpha-\frac{2\abs{\braket{\alpha}{\beta}}^2}{\braket\beta}+\frac{\abs{\braket{\alpha}{\beta}}^2}{\braket\beta}\ge 0\implies\braket\alpha\braket\beta-\abs{\braket{\alpha}{\beta}}^2\ge 0.$$
+Lemma 2. Hermitian operators have real expectation values. To see this, 
+$$\ev H=\bra aH\ket a=\bra aH^\dag\ket{a}^*=\bra aH\ket{a}^*\implies\ev H\in\mathbb R.$$
+Lemma 3. Anti-Hermitian operators have imaginary expectation values. To see this, $\ev H=-\ev{H}^*\implies \ev H\in\mathbb C.$
+
+\textbf{Uncertainty relation} We claim that $\ev{\Delta a}\ev{\Delta b}\ge \frac 12\abs{\ev{\comm{A}{B}}}.$ To prove this, let  $\ket\alpha=\Delta A\ket\psi$ and $\ket\beta=\Delta B\ket\psi$. From Schwartz inequality, 
+$$\braket\alpha\braket\beta\ge\abs{\braket{\alpha}{\beta}}^2\implies\bra\psi\Delta A^\dag\Delta A\ket\psi\bra\psi\Delta B^\dag\Delta B\ket\psi\ge\abs{\bra\psi\Delta A^\dag\Delta B\ket\psi}^2.$$
+Furthermore, we claim $\Delta A\Delta B=\frac 12\comm{\Delta A}{\Delta B}+\frac 12\acomm{\Delta A}{\Delta B}$. Also, 
+$$\comm{\Delta A}{\Delta B}=\comm{A-\ev A}{B-\ev B}=\comm{A}{B}-\comm{\ev A}{B}-\comm{A}{\ev B}+\comm{\ev A}{\ev B}\implies\comm{\Delta A}{\Delta B}=\comm{A}{B},$$  since $\ev A$ and $\ev B$ commute. Lastl,y
+\begin{align*}
+    \comm{A}{B}^\dag&=(AB-BA)^\dag=BA-AB=-\comm{A}{B}\\
+    \acomm{A}{B}^\dag&=(AB+BA)^\dag=BA+AB=\acomm{A}{B}.
+\end{align*}
+The commutators are anti-hermitian and hence imaginary, and anticommutators are hermitian and hence real. Lastly,
+$$\ev{\Delta A}^2\ev{\Delta B}^2\ge\abs{\ev{\Delta A\Delta B}}^2=\frac 14\abs{\ev{\comm{A}{B}}}^2+\frac 14\abs{\ev{\acomm{A}{B}}}^2\ge \frac 14\abs{\ev{\comm{A}{B}}}^2.$$
+
+\textbf{Change of basis}. Given a two sets of orthonormal and complete basis (for some space), there exists $U$ such that $\ket{b^1}=U\ket{a^1},\,\ket{b^2}=U\ket{a^2},\cdots,\ket{b^n}=U\ket{a^n}$ with $U$ unitary. We explicitly construct:
+$$U=\sum_k\ket{b^k}\bra{a^k}.$$
+Indeed, $U\ket{a^l}=\sum_k\ket{b^k}\braket{a^k}{a^l}=\ket{b^l}.$ Furthermore, 
+From definition, $\braket{a^k}{b^l}=\bra{a^k}U\ket{a^l},$ and hence $U's$ elements are, for a change in basis in $\mathbb R^3$, $U\sim \begin{pmatrix}\hat x\cdot\hat x'&\hat x\cdot\hat y'&\hat x\cdot\hat z'\\\hat y\cdot\hat x'&\hat y\cdot\hat y'&\hat y\cdot\hat z'\\\hat z\cdot\hat x'&\hat z\cdot\hat y'&\hat z\cdot\hat z'\end{pmatrix}.$
+
+Likewise, we can do a change in bra basis. $\braket{b^k}{\alpha}=\sum_l\braket{b^k}{a^l}\braket{a^l}{\alpha}=\sum_l\bra{a^k}U^\dag\ket{a^l}\braket{a^l}{\alpha}$, meaning $\bra{b^k}=\bra{a^k}U^\dag\ket{a^l}\cdot\bra{a^l}$. 
+
+We define the \textbf{translator} to be a operator defined as $I(\dd x')\ket{x'}=\ket{x'+\dd x'}$. Turns out, we have $I(\dd x')=1-i\mathbf k\cdot\dd\mathbf x',$ with $\mathbf k$ hermitian. We can see that four properties are satisfied:
+\begin{enumerate}
+    \item Unity; $I^\dag(\dd x')I(\dd x')=1$
+    \item Composition; $I(\dd x'')I(\dd x')=I(\dd x'+\dd x'')$
+    \item Inverse; $I(-\dd x')=I^{-1}(\dd x')$
+    \item Continuity; $\lim_{\dd x'\to 0}I(\dd x')=1$.
+\end{enumerate}
+With this definition, we get two commutation relations: $\comm{x}{I(\dd x')}=\dd x',\quad \comm{\hat x_i}{\hat k_j}=i\delta_{ij}.$
+With the generating function $F(\mathbf x\mathbf P)=\mathbf x\cdot\mathbf P+\mathbf p\cdot\dd\mathbf x\implies \mathbf X=\mathbf x+\dd\mathbf x,\quad\mathbf P=\mathbf p.$ We claim that this is the translator; if we match up the units, $I(\dd\mathbf x')=1-\frac{i\mathbf p\cdot\dd\mathbf x'}{\hbar}$. For a finite translation, we have $I(\Delta x'e_x)=\lim_{N\to\infty}\left(1-\frac{ip_x\Delta x'}{N\hbar}\right)^N=\exp\left(-\frac{ip_x\Delta x'}\hbar\right).$ Furthermore, we can derive the \textbf{commutation relations}:
+$$\comm{x_i}{x_j}=0,\quad\comm{p_i}{p_j}=0,\quad\comm{x_i}{p_j}=i\hbar\delta_{ij}.$$
+
+We define the \textbf{wavefunction} in position basis as $\psi_\alpha(x')=\braket{x'}{\alpha}$. Evidently, 
+\begin{align*}
+    \braket{\beta}{\alpha}&=\int\dd x'\braket{\beta}{x'}\braket{x'}{\alpha}=\int\dd x'\psi^*_\beta(x')\psi_\alpha(x')\\
+    \bra{\beta}A\ket{\alpha}&=\int\dd x'\int\dd x''\psi^*_\beta(x')\bra{x'}A\ket{x''}\psi_\alpha(x'').
+\end{align*}
+Furthermore, we can represent the momentum operator:
+\begin{align*}
+    \left(1-\frac{ip\Delta x'}\hbar\right)\ket\alpha&=\int\dd x'I(\Delta x')\ket{x'}\braket{x'}\alpha=\int ddx'\ket{x'}\braket{x'-\Delta x'}{\alpha}\\
+    &=\int\dd x'\ket{x'}\braket{x'}{\alpha}-\int\dd x'\ket{x'}\left(\Delta x'\pde{}{x'}\right)\braket{x'}{\alpha}\\
+    \implies p&=\int\dd x'\ket{x'}\left(-i\hbar\pde{}{x'}\bra{x'}\right).
+\end{align*}
+
+Likewise, we define the wavefunction in the momentum basis as $\phi_\alpha(p)=\braket{p'}{\alpha}.$ 
+
+From $\bra{x'}p\ket{p'}=-i\hbar\pde{}{x'}\braket{x'}{p'}=p'\braket{x'}{p'},$ we obtian $\braket{x'}{p'}=\frac 1{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right).$ Hence,
+$$\psi_\alpha(x')=\frac 1{\sqrt{2\pi\hbar}}\int\dd p'\exp\left(\frac{ip'x'}\hbar\right)\phi_\alpha(p'),\quad\phi_\alpha(p')=\frac 1{\sqrt{2\pi\hbar}}\int\dd x'\exp\left(\frac{-ip'x'}\hbar\right)\psi_\alpha(x').$$
+
+\section{Dynamics}
+\textcolor{red}{Lectures 5-6, Sakurai ch.2.1-2.4}
+A \textbf{time-evolution} operator, satisfying similar conditions as the translator, has the form $$U(t_0+\dd t,t_0)=1-\frac{iH\dd t}{\hbar}=\exp\left(\frac{-iH(t-t_0)}{\hbar}\right).$$
+From this, we find the Schrodinger equation:
+$$i\hbar\pde{}{t}U(t,t_0)=HU(t,t_0)\implies i\hbar\pde{}{t}\ket{\alpha,t_0:t}=H\ket{\alpha,t_0:t},$$
+where $\ket{\alpha,t_0:t}=U(t,t_0)\ket{\alpha,t_0}.$ 
+
+For \textbf{energy eigenkets} defined $H\ket{a'}=E_{a'}\ket{a'}$, we have 
+$$\exp\left(\frac{-iHt}{\hbar}\right)=\sum_{a'}\ket{a'}\exp\left(\frac{-iE_{a'}t}{\hbar}\right)\bra{a'}.$$
+As an example, when this acts on an initial state $\ket{\alpha,t_0}$, we get the expansion coefficients change with time as $c_{a'}(t)=c_{a'}(t=0)\exp\left(\frac{-iE_{a'}t}\hbar\right).$ Furthermore, if the initial state happens to be an energy eigenstate itself, it is a constant of the motion. 
+
+Consider an observable $B$. If it were to be measured with respect to an energy eigenket, $\ket{a'}$, we have $\ket{a',t_0=0;t}=U(t,0)\ket{a'}$ for the state ket; $\ev B$ is given by $\ev B=\bra{a'}U^\dag(t,0)BU(t,0)\ket{a'}=\bra{a'}\exp\left(\frac{iE_{a'}t}\hbar\right)B\exp\left(\frac{-iE_{a'}t}\hbar\right)\ket{a'}=\bra{a'}B\ket{a'},$ independent of $t$. This is referred as a \textbf{stationary state}. If we take the superposition of energy eigenstates, we get a \textbf{nonstationary state}: for $\ket{\alpha,t_0=0}=\sum_{a'}c_{a'}\ket{a'}$, we have 
+$$\ket B=\sum_{a'}\sum_{a''}c_{a'}^*c_{a''}\bra{a'}B\ket{a''}\exp\left(\frac{-i(E_{a''}-E_{a'})t}\hbar\right).$$
+
+\subsection{Harmonic Oscillator}
+Let $V(x)=\frac 12m\omega^2x^2$ and $\hat H=\frac{p^2}{2m}+\frac 12m\omega^2x^2$. In the position basis, we have 
+$$-\frac{\hbar^2}{2m}\pden{2}{}{x}\psi(x)+\frac 12m\omega^2x^2\psi(x)=E\psi(x).$$
+We define the creation and annihilation operator to be 
+$$a^\dag=\frac 1{\sqrt{2m\hbar\omega}}(m\omega x-ip),\quad a=\frac 1{\sqrt{2m\hbar\omega}}(m\omega x+ip).$$
+From this, we can write the Hamiltonian operator:
+$$H=\left(a^\dag a+\frac 12\right)\hbar\omega.$$
+The commutation relations state 
+$$\comm{a}{a^\dag}=\mathbbm 1,\quad \comm{H}{a}=-\hbar\omega a,\quad\comm{H}{a^\dag}=\hbar\omega a^\dag.$$
+Using the commutation relations, we have that for $\{\ket n\}$ eigenstates of $H$, $a\ket n$ is also an eigenstate with $\hbar\omega$ less energy. Likewise, $a^\dag\ket n$ is an eigenstate with $\hbar\omega$ more energy.
+
+For physical reasons, we claim that there's a ground state where $a\ket{\psi_0}=\ket 0$. The energy is given as $H\ket{\psi_0}=\frac{\hbar\omega}2\ket{\psi_0}.$
+
+Since the eigenstates are normalized, we can easily found the proportionality constant of the ladder operators from their definition:
+$$a\ket n=\sqrt n\ket{n-1},\quad a^\dag\ket n=\sqrt{n+1}\ket{n-1}.$$
+Furthermore, we can find the ground state wavefunction from the definition of the ground state, $a\ket{\psi_0}=\ket 0$; we have 
+$$\frac 1{\sqrt{2m\hbar\omega}}(m\omega x+\hbar\partial_x)\psi_0(x)=0\implies \psi_0(x)=\frac{1}{(\pi x_0^2)^{1/4}}e^{-\frac{x^2}{2x_0^2}},\quad x_0=\sqrt{\frac\hbar{m\omega}}.$$
+Furthermore, from the recursion relation, we get 
+$$\ket n=\frac{(a^\dag)^n}{\sqrt{n!}}\ket{\psi_0}\implies\psi_n(x)=\frac{(m\omega x-\hbar\partial_x)^n}{(2m\hbar\omega)^{n/2}\sqrt{n!}}\psi_0(x).$$
+
+\subsection{Hydrogen Atom}
+Let the Hamiltonian be $H=-\frac{\hbar^2}{2m}\nabla^2+V(r)$. The differential equation becomes
+$$-\frac{\hbar^2}{2mr^2}\left[\partial_r(r^2\partial_r\psi_n)+\nabla_{\theta\psi}^2\psi_n\right]+V(r)\psi_n=E_n.$$
+If we let $\psi_n(x)=R(r)Y(\theta,\phi)$, we get two differential equations:
+\begin{align*}
+    \frac 1R\partial_r(r^2\partial_r R)-\frac{2mr^2}{\hbar^2}(V(r)-E_n)&=l(l+1)\\
+    \frac 1Y\nabla^2_{\theta\phi}Y&=-l(l+1).
+\end{align*}
+If we let $Y=f(\theta)g(\phi)$, we get two differential equations:
+\begin{align*}
+    \frac 1f\sin\theta\partial_\theta(\sin\theta\partial_\theta f)+l(l+1)\sin^2\theta&=m^2\\
+    \frac 1g\partial_\phi^2g&=-m^2.
+\end{align*}
+From periodicity ($g(\phi)=g(\phi+2\pi)$), we get $m=0,\pm 1,\pm 2,\pm 3,\cdots.$ and solution $g(\phi)=e^{\pm im\phi}$. Furthermore, for $f$, the solutions are the associated legendre function; 
+$$P_{lm}(x)=(1-x^2)^{m/2}\left(\ode{}{x}\right)^{\abs{m}}P_l(x);\quad P_l(x)=\frac 1{2^ll!}\left(\ode{}x\right)^l(x^2-1)^l.$$
+There's two conditions; 
+\begin{enumerate}
+    \item $l\in\mathbb N$; since the Legendre polynomial has the $l$th derivative
+    \item $\abs{m}\le 1$, since otherwise, $P_{lm}$ has more derivatives than polynomials.
+\end{enumerate}
+Therefore, 
+$$Y_{lm}(\theta,\phi)=AP_{lm}(\cos\theta)e^{im\phi},$$
+known as the spherical harmonics. They are orthonormal.
+
+\subsection{Angular Momentum}
+Turns out, $Y_{lm}(\theta,\phi)$ are eigenstates of $\mathbf L=\mathbf x\times\mathbf p$. As far as the angular momentum operators are concerned, we have two facts:
+\begin{enumerate}
+    \item $L_i$ and $L_j$, for $i\ne j$ are incompatible; $\comm{L_i}{L_j}=i\hbar\epsilon_{ijk}L_k$. In other words, we can't determine all components of $\mathbf L$. 
+
+    This is due to the fact that angular momenta are generators of rotations, which don't commute.
+    \item $L^2$ and $L_i$ are compatible; $\comm{L^2}{L_i}=0$.
+\end{enumerate}
+From fact 2, we can find simultaneous eigenstates for $L_z$ and $L^2$. We define
+$$L_z\ket{\lambda,\mu}=\mu\ket{\lambda,\mu},\quad L^2\ket{\lambda,\mu}=\lambda\ket{\lambda,\mu}.$$
+Furthermore, we define the ladder operators: $L_\pm=L_x\pm iL_y$. By definition, 
+$$L^2=L_\pm L_\mp +L_z^2\mp\hbar L_z,$$
+which correspond to raising/lowering $L_z$ by $\hbar$.
+The commutation relations for these ladder operators are:
+$$\comm{L^2}{L_\pm}=0,\quad \comm{L_z}{L_\pm}=\pm\hbar L_\pm.$$
+To find the upper and lower bounds, we let $L_z\ket{\lambda,l}=l\hbar\ket{\lambda,l},$ $L_z\ket{\lambda,l'}=l'\hbar\ket{\lambda,l'}$, and $L^2\ket{\lambda, l}=\lambda\ket{\lambda,l}$. Then, the upper and lower bounds, defined as $L_+\ket{\lambda l}=L_-\ket{\lambda l'}0$, gives $\lambda=l(l+1)\hbar^2=l'(l'-1)\hbar^2$, and from the ordering of bounds, we have $l'=-l$, giving us $\lambda=l(l+1)\hbar^2$.
+
+Now, we label $\ket{\lambda,\mu}$ as $\ket{l,m}$. We see that $(L_+)^N\ket{l,-l}=(-l+N)\hbar\ket{lm}$, meaning $l$ has to be half-integers and $m\in[-l,l]\bigcap\mathbb Z.$ Now, 
+$$L^2\ket{lm}=l(l+1)\hbar^2\ket{lm},\quad L_z\ket{lm}=m\hbar\ket{lm}.$$
+If we go back to the hydrogen atom, we can express:
+$$L_z=\frac\hbar i\partial_\phi,\quad L^2=-\hbar^2\nabla^2_{\theta\phi}.$$
+Therefore, 
+$$\braket{x}{lm}=Y_{lm}(\theta,\phi).$$
+
+\section{Berry's Phase, Aharnov-Bohm Effect (Lecture 23)}
+\paragraph{Gauge Invariance}
+We work in the Lorenz gauge:
+$$\mathbf E=-\nabla\phi-\pde{\mathbf A}t,\quad\mathbf B=\nabla\times\mathbf A.$$
+Recall that we can make a gauge transformation
+$$\phi\to\phi-\pde\Lambda t,\quad\mathbf A\to\mathbf A+\nabla\Lambda.$$
+Recall that the Hamiltonian of a charged particle in $\mathbf E$ and $\mathbf B$ is 
+$$H=\frac 1{2m}\left(\mathbf p-q\mathbf A\right)^2+q\phi,$$
+Note that $\mathbf p$, the canonical momentum is not gauge invariant; instead, we use $\mathbf p-q\mathbf A$ as our \textbf{kinematic momentum} (\textcolor{red}{Sakurai 2.7})
+
+\paragraph{Gauge invariance in QM}
+We make the following transformations to promote the canonical momenta to the kinematic momenta:
+$$\mathbf p\to\mathbf p-q\mathbf A,\quad\frac\hbar i\nabla\to\left(\frac\hbar i\nabla-q\mathbf A\right).$$
+We claim that the Schrodinger's equation is gauge invariant if 
+$$\ket\psi\to e^{iq\Lambda/\hbar}\ket\psi,q\quad \phi\to\phi-\pde\Lambda t,\quad\mathbf A\to\mathbf A+\nabla\Lambda.$$
+
+\paragraph{Aharnov-Bohm Effect}
+Consider two paths around an infinitely long solenoid. Consider two gauges:
+\begin{enumerate}[label=(\alph*)]
+    \item $\mathbf A=0$, with $\ket\psi_{\mathbf A=0}$.
+    \item $\mathbf A=\nabla\Lambda\implies\Lambda=\int^{\mathbf r}_{\mathbf r_0}\dd\mathbf r'\cdot\mathbf A$.
+\end{enumerate}
+Since wavefunctions in different gauges are related by a phase factor given above, we can write 
+$$\ket\psi_{\mathbf A}=\exp\left[\frac{iq}\hbar\int^r_{r_0}\dd\mathbf r'\cdot\mathbf A(\mathbf r')\right]\ket\psi_{\mathbf A=0}.$$
+Hence, if we were to split the original beam and evolve, then recombine, the norm becomes 
+$$\braket\psi=\braket{\psi_0}{\psi_0}\cos^2\left(\frac{q\Phi}{2\hbar}\right).$$
+
+\end{document}

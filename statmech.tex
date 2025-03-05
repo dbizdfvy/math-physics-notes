@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{yehyun}
+
+\begin{document}
+
+\subsection{Random Walks}
+Consider a random walk with steps $\mathbf l_N$ of size $L$ in a random direction. The displacement after $N$ such steps is $\mathbf s_N=\sum_Nl_N$.
+
+The mean square displacement of a random walk containing $N$ steps is 
+$$\ev{\mathbf s_N^2}=\ev{(\mathbf s_N+\mathbf l)^2}=\ev{\mathbf s_{N-1}^2}+\Ccancel[red]{2\ev{\mathbf s_N\cdot\mathbf l}}+\ev{\mathbf l^2}=NL^2\implies\sqrt{\ev{\mathbf s_N^2}}=\sqrt NL.$$
+Note that $\ev{\mathbf s_N\cdot l}=\sum\ev{\mathbf l_N}\cdot\ev{\mathbf l}=0,$ since $\mathbf l$ are independent.
+
+\subsection{Diffusion Equation}
+The continuum limit of an ensemble of random walks can be described by the diffusion equation. 
+
+Consider a random walk with step size described by a probability distribution $\chi(l)$. Its mean is $0$ with standard deviation $a^2$:
+$$\int \chi(z)\dd z=1,\quad \int z\chi(z)\dd z=0,\quad\int z^2\chi(z)\dd z=a^2.$$
+Thus, the density at $x$ and $t+\Delta t$ can be written 
+\begin{align*}
+    \rho(x,t+\Delta t)&=\int\rho(x',t)\chi(x-x')\dd x'\\
+    &=\int\rho(x-z,t)\chi(z)\dd z\\
+    &\approx\int\left[\rho(x,t)-z\pde\rho x+\frac 12z^2\pden{2}{\rho}{x}\right]\chi(z)\dd z\\
+    &=\rho(x,t)+\frac{a^2}{2}\pden{2}{\rho}{x}.
+\end{align*}
+For a sufficiently small $\Delta t$,
+\begin{equation}
+    \pde\rho t=D\pden{2}{\rho}{t},\qquad D=\frac{a^2}{2\Delta t}.
+\end{equation}
+We now define the current to be 
+\begin{equation}
+    \pde\rho t=-\pde Jx,
+\end{equation}
+which allows us to write the diffusion equation as 
+\begin{equation}
+    J_\text{diffusion}=-D\pde\rho x.
+\end{equation}
+
+To solve the diffusion equation, we can consider the plane wave solutions $\rho(x,t)=\tilde\rho_k(t)e^{ikx}$. From the diffusion equation,
+$$\ode{\tilde\rho_k}t=-Dk^2\tilde\rho_k\implies\tilde\rho_k(t)=\tilde\rho_k(0)e^{-D^2kt}.$$
+Reversing this, we get
+$$\rho(x,t)=\frac 1{2\pi}\int\tilde\rho_k(0)e^{ikx}e^{-Dk^2t}\dd k,\quad \tilde\rho_k(0)=\int\rho(x,0)e^{-ikx}\dd x.$$
+
+The Green's function for the diffusion equation is 
+\begin{equation}
+    G(x,t)=\frac 1{\sqrt{4\pi Dt}}e^{-x^2/4Dt}.
+\end{equation}
+
+\section{Temperature}
+
+We define the configuration space $\mathbb Q=(x_1,y_1,z_1,\cdots,x_N,y_N,z_N)$ and the momenta space $\mathbb P=(p_1,\cdots,p_{3N})$ of the particles. 
+
+We define the function $\Omega(E)$ to be the phase-space volume of the states in a shell $(E,E+\delta E)$ where $\delta E\to 0$:
+\begin{equation}
+    \Omega(E)=\frac{1}{\delta E}\int_{E<\mathcal H(\mathbb P,\mathbb Q)<E+\delta E}\dd\mathbb P\dd\mathbb Q.
+\end{equation}
+
+\end{document}

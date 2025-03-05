@@ -1,0 +1,408 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{yehyun}
+\usepackage{xcolor}
+\usepackage{physics}
+
+\title{Notes on Electrodynamics}
+\author{Yehyun Choi}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\section{Preliminaries}
+\textcolor{red}{Goldbarch Ch.2}
+\paragraph{Complete orthonormal functions}
+A set of functions $\{U_n\}\in L^2(S)$ (the inner product is $\langle f,g\rangle=\int_Swf^*g\dd x$, where $w$ is the weighing function) is \textbf{orthonormal} if 
+$$\langle U_n,U_m\rangle=\delta_{nm}.$$
+The set $\{U_n\}\in L^2(S)$ is \textbf{complete} if minimum square error $E_n=\norm{f-(c_1U_1+\cdots c_nU_n)}_S$ approaches zero as $n\to\infty$. Therefore, we have a convergent expansion and completeness relation
+$$f(\xi)=\sum^\infty_{n=1}a_nU_n(\xi),\quad a_n=\int_SU^*_n(\xi)f(\xi)\dd\xi\implies \sum^\infty_{n=1}U^*_n(\xi')U_n(\xi)=\delta(\xi'-\xi),$$
+For example, $U_k=(2\pi)^{-1}\exp(ikx)$ is complete and orthonormal in $L^2(\mathbb R)$:
+$$f(x)=\frac 1{\sqrt{2\pi}}\int^\infty_{-\infty}A(k)e^{ikx}\dd k,\quad A(k)=\frac 1{\sqrt{2\pi}}\int^\infty_{-\infty}e^{-ikx}f(x)\dd x.$$
+Orthogonality and completeness relations are 
+$$\frac 1{2\pi}\int^\infty_{-\infty}e^{i(k-k')x}\dd x=\delta(k-k'),\quad \frac 1{2\pi}\int^\infty_{-\infty}e^{ik(x-x')}\dd k=\delta(x-x').$$
+
+
+
+\paragraph{Green's functions}
+Green's function, for Poisson's equation, is defined 
+$$\nabla'^2G(\mathbf x,\mathbf x')=-4\pi\delta(\mathbf x-\mathbf x')\implies G(\mathbf x,\mathbf x')=\frac 1{\abs{\mathbf x-\mathbf x'}}+F(\mathbf x,\mathbf x'),\hspace{10mm}\nabla'^2F(\mathbf x,\mathbf x)=0.$$
+From Green's theorem, 
+$$\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\int_V\rho(\mathbf x')G(\mathbf x,\mathbf x')\dd^3x'+\frac 1{4\pi}\oint_S\left[G(\mathbf x,\mathbf x')\pde\Phi{n'}-\Phi(\mathbf x')\pde{G(\mathbf x,\mathbf x')}{n'}\right]\dd a'.$$
+From the free parameter $F(\mathbf x,\mathbf x')$, we can let either $G(\mathbf x,\mathbf x')=0$ or $\pde{G(\mathbf x,\mathbf x')}{n'}=0.$ 
+
+\paragraph{Uniqueness theorem}
+Let $U=\Phi_2-\Phi_1$ where $\Phi_1$ and $\Phi_2$ both satisfy the same boundary conditions. From Green's first theorem, 
+$$\int_V(U\nabla^2U+\nabla U\cdot\nabla U)\dd^3x=\oint_SU\pde Un\,\dd a.$$
+For Dirichlet ($U=0$ on S) or Neumann ($\pde Un=0$ on S)conditions,
+$$\int_V\abs{\nabla U}^2\dd^3x=0,$$
+meaning $U$ is a constant. 
+
+
+\pagebreak
+
+\section{Elecrostatics}
+\textcolor{red}{Jackson Chapter 1 (except 1.12-1.13)}
+\subsection{Axioms and Definitions}
+
+\paragraph{Coulomb's law}
+
+Coulomb's law states: the force between two small charged bodies separated in air a distance large compared to their dimensions
+\begin{enumerate}
+    \item varies directly as the magnitude of each charge,
+    \item varies inversely as the square of the distance between them,
+    \item is directed along the line joining the bodies, and
+    \item is attractive if the bodies are oppositely charged and repulsive if the bodies have the same type of charge.
+\end{enumerate}
+This can be written as 
+$$\mathbf E=kq_1\frac{\mathbf x_1-\mathbf x_2}{\abs{\mathbf x_1-\mathbf x_2}^3}.$$
+where $\mathbf F=q\mathbf E$ by definition. 
+
+Electrical forces follow the principle of superposition; for a discrete/continuous distribution of charges,
+$$\mathbf E=\frac 1{4\pi\epsilon_0}\sum^n_{i=1}q_i\frac{\mathbf x-\mathbf x_i}{\abs{\mathbf x-\mathbf x_i}^3}=\frac 1{4\pi\epsilon_0}\int\rho(\mathbf x')\frac{\mathbf x-\mathbf x'}{\abs{\mathbf x-\mathbf x'}^3}\dd^3x'.$$
+
+\paragraph{Gauss' law}
+From Coulomb's law,
+$$\mathbf E\cdot\mathbf n\,\dd a=\frac q{4\pi\epsilon_0}\frac{\cos\theta}{r^2}\dd a=\frac q{4\pi\epsilon_0}\dd\Omega,$$
+for some surface $S$. Therefore,
+$$\oint_S\mathbf E\cdot\,\dd a=\frac q{\epsilon_0}\implies\nabla\cdot\mathbf E=\rho/\epsilon_0,$$
+from the divergence theorem.
+\paragraph{Potential}
+We can write the Coulomb's law as 
+$$\mathbf E=-\nabla\left(\frac 1{4\pi\epsilon_0}\int\frac{\rho(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\dd^3x'\right)=-\nabla\Phi,$$
+where $\Phi$ is some scalar quantity. We define this to be the electric potential.
+
+
+\paragraph{Boundary conditions}
+
+For a charged sheet, the discontinuity in the electrical field is 
+$$(\mathbf E_2-\mathbf E_1)\cdot\mathbf n=\sigma/\epsilon_0.$$
+For a charged dipole layer \textcolor{red}{Jackson page 32}, we have
+$$\Phi_2-\Phi_1=D/\epsilon_0.$$
+
+\paragraph{Poisson equations}
+
+Poisson's equation states that
+$$\nabla^2\Phi=-\rho/\epsilon_0.$$
+It is easy to see that $\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\int\frac{\rho(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\dd^3x'$ satisfies Poisson's equation using $\div(1/r)=4\pi\delta(\mathbf x).$
+
+
+\paragraph{Energy} Consider a charge brought from infinity. The work done is 
+$$W=-\int\mathbf F\cdot\dd\mathbf l=q\int\nabla\Phi\cdot\dd\mathbf l=q\Phi(\mathbf x),$$
+where we took the potential at infinity to zero. It can be written that, for a charge distribution,
+\begin{align*}
+    W&=\frac 1{8\pi\epsilon_0}\sum_i\sum_j\frac{q_iq_j}{\abs{\mathbf x_i-\mathbf x_j}}\\
+    &=\frac 1{8\pi\epsilon_0}\iint \frac{\rho(\mathbf x)\rho(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\,\dd^3x\,\dd^3x'\\
+    &=\frac 12\int\rho(\mathbf x)\Phi(\mathbf x)\,\dd^3x\\
+    &=\frac{-\epsilon_0}2\int\Phi\nabla^2\Phi\,\dd^3x\\
+    &=\frac{\epsilon_2}2\int_{\mathbb R^3}\abs{\nabla\Phi}^2\,\dd^3x,
+\end{align*}
+where we have used Green's first theorem for the last part. From the last result, the energy density is $w=\frac{\epsilon_0}2\abs{\mathbf E}^2.$ However, be warned that this also contains self energy contributions - the interaction potential energy, however, is meaningful in this case \textcolor{red}{(Jackson p. 42.)}
+
+\paragraph{Green's theorems}
+The first Green's theorem can be obtained by applying the div. theorem on $\mathbf A=\phi\nabla\psi$, 
+$$\int_V\nabla\cdot(\phi\nabla\psi)\,\dd^3x=\oint_S\phi\nabla\psi\cdot\mathbf n\,\dd a\implies\int_V\phi\nabla^2\psi+\nabla\phi\cdot\nabla\psi\,\dd^3x=\oint_S\phi\pde\psi n\dd a.$$
+Taking the antisymmetric part, we obtain the second Green's theorem:
+$$\int_V(\phi\nabla^2\psi-\psi\nabla^2\phi)\dd^3x=\oint_S\left[\phi\ode\psi n-\psi\ode\phi n\right]\dd a.$$
+As an example, $\phi=\Phi$ and $\psi=1/\abs{\mathbf x-\mathbf x'}$. We get
+$$\int_V\left[-4\pi\Phi(\mathbf x')\delta(\mathbf x-\mathbf x')+\frac 1{\epsilon_0R}\rho(\mathbf x')\right]\dd^3x'=\oint_S\left[\Phi\pde{}{n'}\left(\frac 1R\right)-\frac 1R\pde\Phi{n'}\right]\dd a'.$$
+Therefore,
+$$\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\int_V\frac{\rho(\mathbf x')}{R}\dd^3x'+\frac 1{4\pi}\oint_S\left[\frac 1R\pde\Phi{n'}-\Phi\pde{}{n'}\left(\frac 1R\right)\right]\dd a'.$$
+
+
+\subsection{Method of Images}
+\textcolor{red}{Jackson Chapter 2-3}
+
+\paragraph{Conducting Sphere - Point Charge}
+Consider a grounded conducting sphere of radius $a$ centered at origin and a point charge $q$ at $\mathbf y$. If we let the image charge be at $\mathbf y'$ with charge $q'$, the potential at $\mathbf x$ is 
+$$\Phi(\mathbf x)=\frac{q/4\pi\epsilon_0}{a\abs{\mathbf n-\frac ya\mathbf n'}}+\frac{q'/4\pi\epsilon_0}{y'\abs{\mathbf n'-\frac a{y'}\mathbf n}},$$
+where we let $\mathbf y$ and $\mathbf y'$ lie on $\mathbf n'$, a unit vector and $\mathbf x$ on $\mathbf n$. This has the solution
+$$q'=-\frac ayq,\quad y'=\frac{a^2}y.$$
+The force acting on charge $q$ can be calculated via Coulomb's law or by integrating $(\sigma^2/2\epsilon_0)\dd a$:
+$$\abs{\mathbf F}=\frac 1{4\pi\epsilon_0}\frac{q^2}{a^2}\left(\frac ay\right)^3\left(1-\frac{a^2}{y^2}\right)^{-2}.$$
+
+If the total charge on the insulated sphere be $Q$. We then use linear superposition of induced charge, $q'$ with the ``added'' charge $Q-q'$ as evenly spread over the surface. Hence,
+$$\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\left[\frac q{\abs{\mathbf x-\mathbf y}}-\frac{aq}{y\abs{\mathbf x-\frac{a^2}{y^2}\mathbf y}}+\frac{Q+\frac ayq}{\abs{\mathbf x}}\right]$$
+
+\paragraph{Conducting Sphere - Uniform Field}
+One can think of uniform field as two opposite charges very far away. We get
+$$\Phi=-E_0\left(r-\frac{a^3}{r^2}\right)\cos\theta\implies\sigma=-\epsilon_0\left.\pde\Phi r\right|_{r=a}=3\epsilon_0E_0\cos\theta.$$
+
+\paragraph{General Solution}
+The green's function (for dirichlet boundary condition) is evidently 
+$$G(\mathbf x,\mathbf x')=\frac 1{\abs{\mathbf x-\mathbf x'}}-\frac a{x'\abs{\mathbf x-\frac{a^2}{x'^2}\mathbf x'}}=\frac 1{(x^2+x'^2-2xx'\cos\gamma)^{1/2}}-\frac 1{\left(\frac{x^2x'^2}{a^2}+a^2-2xx'\cos\gamma\right)}.$$
+Taking the derivative and applying Green's theorem, we obtain
+$$\Phi(\mathbf x)=\frac 1{4\pi}\int\Phi(a,\theta',\phi')\frac{a(x^2-a^2)}{(x^2+a^2-2ax\cos\gamma)^{3/2}}\dd\Omega',$$
+where $\gamma$ is the angle between $x$ and $x'$.
+Using this, one can find the potential of a conducting sphere with hemispheres at different potentials (\textcolor{red}{Jackson 2.7}).
+
+
+\subsection{Separation of Variables}
+If we let the solution of a PDE be a product of single variabled functions, we can reduce the PDE to a system of ODEs. This is particularly useful in solving Laplace's equation.
+
+\paragraph{Cartesian}
+We have 
+$$\Phi=XYZ\implies \frac 1X\oden 2Xx+\frac 1Y\oden 2Yy+\frac 1Z\oden 2Zz=0.$$
+We get 
+$$\frac 1X\oden 2Xx=-\alpha^2,\quad \frac 1Y\oden 2Yy=-\beta^2,\quad \frac 1Z\oden 2Zz=\gamma^2,$$
+where $\alpha^2+\beta^2=\gamma^2.$ The general solution is $\Phi=e^{\pm i\alpha x}e^{\pm i\beta y}e^{\pm\sqrt{\alpha^2+\beta^2}z}.$ 
+To find the specific solution, one must impose the boundary conditions. It is also useful to superpose such solutions, which orthonormality of $e^{ix}$ comes in handy. (\textcolor{red}{Jackson 2.9, 2.10, 2.11})
+
+\paragraph{Spherical}
+With $\Phi=\frac UrPQ,$ (reminder that you have to divide by $r$!) we get the differential equations
+\begin{align*}
+    \frac 1Q\oden 2Q\phi&=-m^2\implies Q=e^{im\phi}\\
+    \frac 1{\sin\theta}\ode{}\theta\left(\sin\theta\ode P\theta\right)+\left[l(l+1)-\frac{m^2}{\sin^2\theta}\right]P&=0\implies P = P^m_l(\cos\theta)\\
+    \oden 2Ur-\frac{l(l+1)}{r^2}U&=0\implies U=Ar^{l+1}+Br^{-l},
+\end{align*}
+where $m$, $l$ are constants.
+\paragraph{Spherical - Azimuthal Symmetry}
+For $m=0$, the solution for $P$ are the legendre polynomials. The first few polynomials are 
+\begin{align*}
+    P_0&=1\\
+    P_1&=x\\
+    P_2&=\frac 12(3x^2-1)\\
+    P_3&=\frac 12(5x^3-3x)\\
+    P_4&=\frac 18(35x^4-30x^2+3)\\
+    P_5&=\frac 18(63x^5-70x^3+15x).
+\end{align*}
+
+Rodrigues' formula in particularly useful:
+$$P_l(x)=\frac 1{2^ll!}\oden l{}x(x^2-1)^l.$$
+Furthermore, the legendre polynomials are orthonormal in $(1,-1)$ if you let $U_l(x)=\sqrt{\frac{2l+1}2}P_l(x).$ Therefore, one can expand a function:
+$$f(x)=\sum^\infty_{l=0}A_lP_l(x),\quad A_l=\frac{2l+1}2\int^1_{-1}f(x)P_l(x)\dd x.$$
+In other words, given the general solution 
+$$\Phi(r,\theta)=\sum^\infty_{l=0}[A_lr^l+B_lr^{-(l+1)}]P_l(\cos\theta),$$
+one cam impose boundary condition since, on a sphere, for example, the boundary condition becomes $V(\theta)=\sum^\infty_{l=0}A_la^lP_l(\cos\theta)\implies A_l=\frac{2l+1}{2a^l}\int^\pi_0V(\theta)P_l(\cos\theta)\sin\theta\dd\theta.$
+
+If we have an azimuthally symmetric system, due to the uniqueness theorem, the potential on the symmetric axis gives the general potential, when multiplied by legendre polynomials; given $\Phi(\theta=0)=\sum^\infty_{l=0}[A_lr^l+B_lr^{-(l+1)}]\implies\Phi(r,\theta)=\sum^\infty_{l=0}[A_lr^l+B_lr^{-(l+1)}]P_l(\cos\theta)$. 
+
+A useful application of this is the expansion of the $1/\abs{\mathbf x-\mathbf x'}$:
+$$\frac 1{\abs{\mathbf x-\mathbf x'}}=\sum^\infty_{l=0}\frac{r^l_<}{r^{l+1}_>}P_l(\cos\gamma),$$
+where $\gamma$ is the angle between $\mathbf x$ and $\mathbf x'$ and $r_>$ and $r_<$ are the greater and smaller of $\mathbf x$ and $\mathbf x'$, respectively. 
+\paragraph{Spherical - General}
+For $m\in[-l,l]$, $P$ has the formula
+$$P^m_l(x)=\frac{(-1)^m}{2^ll!}(1-x^2)^{m/2}\oden{l+m}{}x(x^2-1)^l.$$
+The associated legendre polynomials are again orthogonal in $\phi\in[0,2\pi]$ and $\cos\theta\in[-1,1]$. The normalized associated Legendre polynomials, called the spherical harmonics, are defined by 
+$$Y_{lm}(\theta,\phi)=\sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}}P^m_l(\cos\theta)e^{im\phi},\quad Y_{l0}(\theta,\phi)=\sqrt{\frac{2l+1}{4\pi}}P_l(\cos\theta).$$
+The first few terms can be written out:
+\begin{align*}
+    Y_{00}&=\sqrt{\frac 1{4\pi}}\\
+    Y_{1,\pm 1}&=\mp\sqrt{\frac 3{8\pi}}\sin\theta e^{\pm i\phi},\quad Y_{10}=\sqrt{\frac 3{4\pi}}\cos\theta\\
+    Y_{2,\pm 2}&=\frac 14\sqrt{\frac{15}{2\pi}}\sin^2\theta e^{\pm 2i\phi},\quad Y_{2,\pm 1}=\mp\frac 12\sqrt{\frac{15}{2\pi}}\sin\theta\cos\theta e^{\pm i\phi},\quad Y_{2,0}=\frac 14\sqrt{\frac 5\pi}(3\cos^2\theta-1)\\
+    Y_{3,\pm 3}&=\mp\frac 18\sqrt{\frac{35}\pi}\sin^3\theta e^{\pm 3i\phi},\quad Y_{3,\pm 2}=\frac 14\sqrt{\frac{105}{2\pi}}\sin^2\theta\cos\theta e^{\pm 2i\phi},\quad Y_{3,\pm 1}=\mp\frac 18\sqrt{\frac{21}\pi}\sin\theta(5\cos^2\theta-1)e^{\pm i\phi}\\
+    Y_{3,0}&=\frac 14\sqrt{\frac 7\pi}(5\cos^3\theta-3\cos\theta).
+\end{align*}
+
+Its orthonormality and completeness relations state 
+\begin{align*}
+    &\int^{2\pi}_0\dd\phi\int^\pi_0\sin\theta\dd\theta Y^*_{l'm'}(\theta,\phi)Y_{lm}(\theta,\phi)=\delta_{l'l}\delta_{m'm}\\
+    &\sum^\infty_{l=0}\sum^l_{m=-l}Y^*_{lm}(\theta',\phi')Y_{lm}(\theta,\phi)=\delta(\phi-\phi')\delta(\cos\theta-\cos\theta').
+\end{align*}
+Evidently, an arbitrary function can be expanded into spherical harmonics:
+$$g(\theta,\phi)=\sum^\infty_{l=0}\sum^l_{m=-l}A_{lm}Y_{lm}(\theta,\phi),\quad A_{lm}=\int\dd\Omega Y^*_{lm}(\theta,\phi)g(\theta,\phi).$$
+Lastly, the addition theorem for spherical harmonics expresses a Legendre polynomial of order $l$ in the angle $\gamma$ in products of the spherical harmonics of the angles $\theta,\phi$ and $\theta',\phi'$:
+$$P_l(\cos\gamma)=\frac{4\pi}{2l+1}\sum^l_{m=-l}Y^*_{lm}(\theta',\phi')Y_{lm}(\theta,\phi).$$
+Therefore, $1/\abs{\mathbf x-\mathbf x'}$ can be written
+$$\frac 1{\abs{\mathbf x-\mathbf x'}}=4\pi\sum^\infty_{l=0}\sum^l_{m=-l}\frac 1{2l+1}\frac{r^l_{<}}{r^{l+1}_>}Y^*_{lm}(\theta',\phi')Y_{lm}(\theta,\phi).$$
+
+\paragraph{Cylindrical} With $\Phi=RQZ$, we get the differential equations
+\begin{align*}
+    \oden 2Zz-k^2Z&=0\implies Z=e^{\pm kz}\\
+    \oden 2Q\phi+\nu^2Q&=0\implies Q=e^{\pm i\nu\phi}\\
+    \oden 2R\rho+\frac 1\rho\ode R\rho+\left(k^2-\frac{\nu^2}{\rho^2}\right)R&=0\implies R=AJ_\nu(k\rho)+BN_m(k\rho).
+\end{align*}
+
+The radial equation, after a change of variable $x=k\rho$, becomes the Bessel equation ($\oden 2Rx+\frac 1x\ode Rx+\left(1-\frac{\nu^2}{x^2}\right)R=0$). The two solutions are (Bessel functions of the first kind of order $\pm\nu$)
+$$J_\nu(x)=\left(\frac x2\right)^\nu\sum^\infty_{j=0}\frac{(-1)^j}{j!\Gamma(j+\nu+1)}\left(\frac x2\right)^{2j},\quad J_{-\nu}(x)=\left(\frac x2\right)^{-\nu}\sum^\infty_{j=0}\frac{(-1)^j}{j!\Gamma(j-\nu+1)}\left(\frac x2\right)^{2j}.$$
+The Bessel function can be written as an integral:
+$$J_n(z)=\frac{i^{-n}}{\pi}\int^\pi_0e^{iz\cos\theta}(n\theta)\dd\theta.$$
+
+
+For $\nu\ne\mathbb Z$, these two solutions are linearly dependent. It is then customary to use $J_\nu(x)$ and $N_\nu(x)$ - Bessel function of the second kind:
+$$N_\nu(x)=\frac{J_\nu(x)\cos\nu\pi-J_{-\nu}(x)}{\sin\nu\pi}.$$
+For boundary condition purposes, for $x\ll 1$, $J_\nu(x)\approx x^\nu,\quad N_\nu(x)\approx \ln(x/2)$, for $\nu=0$, and $N_\nu(x)\approx x^{-\nu}$ for $\nu\ne 0$. For $x\gg 1$, $J_\nu(x)\approx\cos x,\quad N_\nu(x)\approx\sin x$.
+
+A third set of solutions exist, called the Hankel functions, but are most commonly used in propagation of waves.
+
+Lastly, only Bessel functions of the first kind are orthogonal on the interval $[0,1]$: the Fourier-Bessel series states 
+$$f(\rho)=\sum^\infty_{n=1}A_{\nu n}J_\nu\left(x_{\nu n}\frac\rho a\right),\quad A_{\nu n}=\frac 2{a^2J^2_{\nu+1}(x_{\nu n})}\int^a_0\rho f(\rho)J_\nu\left(\frac{x_{\nu n}\rho}a\right)\dd\rho.$$
+
+\subsection{Green's Function}
+Green's function can be found by expanding both sides of $\nabla^2G(\mathbf x,\mathbf x')=-4\pi\delta(\mathbf x-\mathbf x')$ - left side can be normally expanded and the right side can be expanded using completeness of spherical harmonics/Bessel functions. 
+\paragraph{Spherical Green Function}
+The Green function for a spherical shell bounded by $r=a$ and $r=b$ is 
+$$G(\mathbf x,\mathbf x')=4\pi\sum^\infty_{l=0}\sum^l_{m-l}\frac{Y^*_{lm}(\theta',\phi')Y_{lm}(\theta,\phi)}{(2l+1)\left[1-\left(\frac ab\right)^{2l+1}\right]}\left(r^l_<-\frac{a^{2l+1}}{r^{l+1}_<}\right)\left(\frac 1{r^{l+1}_>}-\frac{r^l_>}{b^{2l+1}}\right).$$
+\paragraph{Eigenfunction Expansions}
+Consider an elliptic differential equation of the form 
+$$\nabla^2\psi_n(\mathbf x)+[f(\mathbf x)+\lambda_n]\psi_n(\mathbf x)=0.$$
+Because $\nabla^2+f(\mathbf x)$ is a self-adjoint operator, its eigenfunctions are orthogonal:
+$$\int_V\psi^*_m(\mathbf x)\psi_n(\mathbf x)\dd^3x=\delta_{mn}.$$
+Hence, if we want to solve the Green function for the equation
+$$\nabla^2G(\mathbf x,\mathbf x')+[f(\mathbf x)+\lambda]G(\mathbf x,\mathbf x')=-4\pi\delta(\mathbf x-\mathbf x'),$$
+we can use $G(\mathbf x,\mathbf x')=\sum_na_n(\mathbf x')\psi_n(\mathbf x).$ If we multiply both sides by $\psi^*_m(\mathbf x'$ and integrate, we get $G(\mathbf x,\mathbf x')=4\pi\sum_n\frac{\psi^*_n(\mathbf x')\psi_n(\mathbf x)}{\lambda_n-\lambda}.$
+
+\subsection{Multipole Expansion}
+Comparing the separation of variables solution outside a sphere with the potential of a charge density distribution gives us the integral 
+$$\Phi(\mathbf x)=\frac 1{\epsilon_0}\sum_{l,m}\frac 1{2l+1}q_{lm}\frac{Y_{lm}(\theta,\phi)}{r^{l+1}},\quad q_{lm}=\int Y^*_{lm}(\theta',\phi'){r'}^l\rho(\mathbf x')\dd^3x'$$
+We call these coefficients $q_{lm}$ be called multipole moments. The first few terms are 
+$$\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\left[\frac qr+\frac{\mathbf p\cdot\mathbf x}{r^3}+\frac 12\sum_{i,j}Q_{ij}\frac{x_ix_j}{r^5}+\cdots\right],$$
+where 
+$$q=\rho(\mathbf x')\dd^3x',\quad \mathbf p=\int\mathbf x'\rho(\mathbf x')\dd^3x',\quad Q_{ij}=\int(3x'_ix'_j-{r'}^2\delta_{ij})\rho(\mathbf x')\dd^3x'.$$
+Note,
+\begin{enumerate}
+    \item There's $(l+1)(l+2)/2$ cartesian multipole moments versus $(2l+1)$ spherical moments. This is becuase Cartesian multipole moments are traceless symmetric tensors.
+    \item Multipole moments are dependent on the location on the origin.
+\end{enumerate}
+
+For the dipole term, in specific, 
+$$\mathbf E(\mathbf x)=\frac 1{4\pi\epsilon_0}\left[\frac{3\mathbf n(\mathbf p\cdot\mathbf n)-\mathbf p}{\abs{\mathbf x-\mathbf x_0}^3}-\frac{4\pi}3\mathbf p\delta(\mathbf x-\mathbf x_0)\right].$$
+Furthermore, the energy of a multipole system takes the form 
+$$W=q\Phi(0)-\mathbf p\cdot\mathbf E(0)-\frac 16\sum_i\sum_jQ_{ij}\pde{E_j}{x_i}(0)+\cdots.$$
+
+\subsection{Macroscopic Media}
+We define the macroscopic (electric) polarization $\mathbf P$ and charge density $\rho$ as  
+$$\mathbf P(\mathbf x)=\sum_iN_i\ev{\mathbf p_i},\quad \rho(\mathbf x)=\sum_iN_i\ev{e_i}+\rho_\text{excess},$$
+where we're taking the weighted average of the dipole moment/molecular excess charge of the molecules in a small volume centered at $\mathbf x$ - $N_i$ are the weights of the molecules. The potential is 
+$$\Phi(\mathbf x)=\frac 1{4\pi\epsilon_0}\int\dd^3x'\left[\frac{\rho(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}+\mathbf P(\mathbf x')\cdot\nabla'\left(\frac 1{\abs{\mathbf x-\mathbf x'}}\right)\right]=\frac 1{4\pi\epsilon_0}\int\dd^3x'\frac 1{\abs{\mathbf x-\mathbf x'}}\left[\rho(\mathbf x')-\nabla'\cdot\mathbf P(\mathbf x')\right].$$
+Defining the electric displacement $\mathbf D=\epsilon_0\mathbf E+\mathbf P$, we have $\nabla\cdot\mathbf D=\rho$. 
+
+For a linearly dielectric medium, the polarization is parallel to $\mathbf E$:
+$$\mathbf P=\epsilon_0\chi_e\mathbf E\implies \mathbf E=\epsilon\mathbf E,\quad \epsilon=\epsilon_0(1+\chi_e)\implies\nabla\cdot\mathbf E=\rho/\epsilon.$$
+where $\chi_e$ is the susceptibility of the medium and $\epsilon/\epsilon_0=1+\chi_e$ is the dielectric constant.
+
+\textbf{Boundary Problems}
+The boundary conditions are 
+$$(\mathbf D_2-\mathbf D_1)\cdot\mathbf n_{21}=\sigma,\quad(\mathbf E_2-\mathbf E_1)\times\mathbf n_{21}=0.$$
+As an example, \textcolor{red}{Jackson 4.4} 
+
+\section{Magnetostatics}
+\subsection{Definitions}
+For magnetostatics, we have $\nabla\cdot\mathbf J=0$. 
+
+\paragraph{Biot-Savart Law}
+The Biot-Savart law is given as 
+$$\dd\mathbf F=I_1(\dd\mathbf I_1\times\mathbf B),\quad\dd\mathbf B=kI\frac{(\dd\mathbf I\times\mathbf x)}{\abs{\mathbf x}^3},$$
+with $k=\mu_0/4\pi$ in SI units. From the force law, 
+$$\mathbf F=\int\mathbf J(\mathbf x)\times\mathbf B(\mathbf x)\dd^3x,\quad\mathbf N=\int\mathbf x\times(\mathbf J\times\mathbf B)\dd^3x.$$
+\paragraph{Ampere's law and potential(s)} For a current density, we have 
+$$\mathbf B=\frac{\mu_0}{4\pi}\int\mathbf J(\mathbf x')\times\frac{\mathbf x-\mathbf x'}{\abs{\mathbf x-\mathbf x'}^3}\dd^3x'=\frac{\mu_0}{4\pi}\nabla\times\int\frac{\mathbf J(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\dd^3x'.$$
+Evidently, $\nabla\cdot\mathbf B=0$. If we take the curl of the magnetic field, we obtain
+$$\nabla\times\mathbf B=\mu_0\mathbf J\implies\oint_C\mathbf B\cdot\dd\mathbf l=\mu_0I.$$
+From the fact that $\nabla\cdot\mathbf B=0$, we define the vector potential:
+$$\mathbf B(\mathbf x)=\nabla\times\mathbf A(\mathbf x)\implies\mathbf A(\mathbf x)=\frac{\mu_0}{4\pi}\int\frac{\mathbf J(\mathbf x')}{\abs{\mathbf x -\mathbf x'}}\dd^3x'+\nabla\Psi(\mathbf x).$$
+There's a degree of freedom in the vector potential and the related transformations are called gauge transformations - $\mathbf A\to\mathbf A+\nabla\Psi$. It is convenient to choose the gauge (Coulomb gauge) such that $\nabla\cdot\mathbf A=0\implies\nabla^2\mathbf A=-\mu_0\mathbf J$. $\Psi$ is constant for this gauge, because $\nabla\cdot\mathbf =0\implies\nabla^2\Psi=0$.
+
+However, in the case that $\mathbf J=0$, we can define the magnetic scalar potential such that $\mathbf H=-\nabla\Phi_M$. If $\mu$ is piecewise constant, each region satisfies the Laplace equation: $\nabla^2\Phi_M=0$.
+
+\subsection{Magnetic Moment}
+Recall the vector expansion $\frac 1{\abs{\mathbf x-\mathbf x'}}=\frac 1{\abs{\mathbf x}}+\frac{\mathbf x\cdot\mathbf x'}{\abs{\mathbf x}^3}+\cdots$. A given component of the vector potential is 
+$$A_i(\mathbf x)=\frac{\mu_0}{4\pi}\left[\frac 1{\abs{\mathbf x}}\int J_i(\mathbf x')\dd^3x'+\frac{\mathbf x}{\abs{\mathbf x}^3}\cdot\int J_i(\mathbf x')\mathbf x'\dd^3x'+\cdots\right]$$
+Using the identity $f\mathbf J\cdot\nabla'g+g\mathbf J\cdot\nabla'f+fg\nabla'\cdot\mathbf J=0$ with $f=1,g=x'_i$, we have $\int J_i(\mathbf x')\dd^3x'=0$. With $f=x'_i,g=x'_j$, we have $\int(x'_iJ_j+x'_jJ_i)\dd^3x'=0.$ Hence, we can write the dipole term as 
+$$\mathbf x\cdot\int\mathbf x'J_i\dd^3x'=-\frac 12\sum_jx_j\int(x'_iJ_j-x'_jJ_i)\dd^3x'=-\frac 12\left[\mathbf x\times\int(\mathbf x'\times\mathbf J)\dd^3x'\right]_i.$$
+We can then define 
+$$\mathcal M(\mathbf x)=\frac 12(\mathbf x\times\mathbf J(\mathbf x)),\quad\mathbf m=\frac 12\int\mathbf x'\times\mathbf J(\mathbf x')\dd^3x'\implies\mathbf A_\text{dipole}(\mathbf x)=\frac{\mu_0}{4\pi}\frac{\mathbf m\times\mathbf x}{\abs{\mathbf x}^3}\implies\mathbf B(\mathbf x)=\frac{\mu_0}{4\pi}\left[\frac{3\mathbf n(\mathbf n\cdot\mathbf m)-\mathbf m}{\abs{\mathbf x}^3}\right].$$
+The magnitude of a planar current loop is evidently $\abs{\mathbf m}=I\cdot(\text{Area})$. Lastly, at the origin, we write 
+$$\mathbf B(\mathbf x)=\frac{\mu_0}{4\pi}\left[\frac{3\mathbf n(\mathbf n\cdot\mathbf m)-\mathbf m}{\abs{\mathbf x}^3}+\frac{8\pi}3\mathbf m\delta(0)\right],$$
+similar to the electric dipole counterpart (\textcolor{red}{Jackson 5.6}).
+
+In general, the force term is, with $B_k(\mathbf x)=B_k(0)+\mathbf x\cdot\nabla B_k(0)+\cdots$, 
+$$F_i=\sum_{jk}\epsilon_{ijk}\int J_j(\mathbf x')\mathbf x'\cdot\nabla B_k(0)\dd^3x'+\cdots=\sum_{jk}\epsilon_{ijk}(\mathbf m\times\nabla)_jB_k(\mathbf 0)\implies\mathbf F=(\mathbf m\times\nabla)\times\mathbf B=\nabla(\mathbf m\cdot\mathbf B).$$
+Likewise, 
+$$\mathbf N=\mathbf m\times\mathbf B(0),\quad U=-\mathbf m\cdot\mathbf B.$$
+This has many effects in quantum mechanics; hyperfine splitting for example.
+
+\subsection{Macroscopic Media}
+Defining the magnetization $\mathbf M(\mathbf x)=\sum_iN_i\ev{\mathbf m_i}$, we have 
+$$\mathbf A(\mathbf x)=\frac{\mu_0}{4\pi}\int\left[\frac{\mathbf J(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}+\frac{\mathbf M(\mathbf x')\times(\mathbf x-\mathbf x')}{\abs{\mathbf x-\mathbf x'}^3}\right]\dd^3x'=\frac{\mu_0}{4\pi}\int\frac{[\mathbf J(\mathbf x')+\nabla'\times\mathbf M(\mathbf x')]}{\abs{\mathbf x-\mathbf x'}}\dd^3x'.$$
+We define the magnetic field strength $\mathbf H$:
+$$\mathbf H=\frac 1{\mu_0}\mathbf B-\mathbf M\implies\nabla\times\mathbf H=\mathbf J.$$
+
+The boundary conditions are such that 
+$$(\mathbf B_2-\mathbf B_1)\cdot\mathbf n=0,\quad\mathbf n\times(\mathbf H_2-\mathbf H_1)=\mathbf K.$$
+
+\paragraph{Magnetization Problems}
+With $\mathbf M$ given and $\mathbf J=0$, we have Poisson's equation;
+$$\Phi_M(\mathbf x)=-\frac 1{4\pi}\nabla\cdot\int\frac{\mathbf M(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\dd^3x'=\frac{\mathbf m\cdot\mathbf x}{4\pi r^3}.$$
+If there's a discontinuity in the magnetization at the surface, we write
+$$\Phi_M(\mathbf x)=-\frac 1{4\pi}\int_V\frac{\nabla'\cdot\mathbf M(\mathbf x')}{\abs{\mathbf x-\mathbf x'}}\dd^3x'+\frac 1{4\pi}\oint_S\frac{\mathbf n'\cdot\mathbf M(\mathbf x')\dd a'}{\abs{\mathbf x-\mathbf x'}},$$
+with $n\cdot\mathbf M$ acting as the magnetic surface-charge density.
+
+For example, \textcolor{red}{Jackson 5.10, 5.11, 5.12}
+
+\section{Electrodynamics}
+While the statics solution was valid for $\nabla\cdot\mathbf J=0$, by making the generalization $\mathbf J\to\mathbf J+\pde{\mathbf D}t$, we get 
+$$\nabla\cdot\mathbf D=\rho,\quad\nabla\cdot\mathbf B=0,\quad\nabla\times\mathbf H=\mathbf J+\pde{\mathbf D}t,\quad\nabla\times\mathbf E=-\pde{\mathbf B}t.$$
+
+\subsection{Potentials}
+The magnetic Gauss' and Faraday's law can be solved with scalar and vector potentials:
+$$\mathbf B=\nabla\times\mathbf A,\quad\mathbf E=-\nabla\Phi-\pde{\mathbf A}t.$$
+We can make a gauge transformation $\mathbf A\to\mathbf A+\nabla\Lambda$ and $\Phi\to\Phi-\pde{\Lambda}t$. If we choose the gauge such that $\nabla\cdot\mathbf A+\frac 1{c^2}\pde{\Phi}t=0$, we get 
+$$\nabla^2\Phi-\frac 1{c^2}\pden 2\Phi t=-\rho/\epsilon_0,\quad\nabla^2\mathbf A-\frac 1{c^2}\pden 2{\mathbf A}t=-\mu_0\mathbf J.$$
+Furthermore, $\Lambda$ that satisfies the Lorenz condition belongs to the Lorenz gauge. 
+
+\subsection{Poynting's theorem}
+The rate of work (no $B$!) can be written as an integral of $\mathbf J\cdot\mathbf E$. If the medium is linear in $\mu,\epsilon$, we define the energy density and obtain
+$$u=\frac 12(\mathbf E\cdot\mathbf D+\mathbf B\cdot\mathbf H)\implies\pde ut+\nabla\cdot\mathbf S=-\mathbf J\cdot\mathbf E.$$
+$\mathbf S$, the energy flow, is called the Poynting vector. Poynting's theorem expresses 
+$$\ode Et=-\oint_S\mathbf n\cdot\mathbf S\dd a=\ode{}t(E_\text{mech}+E_\text{field}),\quad E_\text{field}=\frac{\epsilon_0}2\int_V(\mathbf E^2+c^2\mathbf B^2)\dd^3x,\quad E_\text{mech}=\int_V\mathbf J\cdot\mathbf E\dd^3x.$$
+Similarly, 
+$$\sum_\beta\int_V\pde{}{x_\beta}T_{\alpha\beta}\dd^3x=\oint_S\sum_\beta T_{\alpha\beta}n_\beta\dd a=\ode{}t(\mathbf P_\text{mech}+\mathbf P_\text{field})_\alpha,$$
+where
+$$\ode{\mathbf P}t=\int_V(\rho\mathbf E+\mathbf J\times\mathbf B)\dd^3x,\quad \mathbf P_\text{field}=\mu_0\epsilon_0\int_V\mathbf E\times\mathbf H\dd^3x,\quad T_{\alpha\beta}=\epsilon_0\left[E_\alpha E_\beta+c^2B_\alpha B_\beta-\frac 12(\mathbf E\cdot\mathbf E+c^2\mathbf B\cdot\mathbf B)\delta_{\alpha\beta}\right].$$
+Note that the momentum density is $\mathbf g=\frac 1{c^2}\mathbf E\times\mathbf H=\frac 1{c^2}\mathbf S.$
+
+\section{Lecture 24 (Nov. 19) - Radiation and Causality}
+
+Maxwell's equations:
+$$\partial_\mu F^{\mu\nu}=\frac{4\pi}cJ^\nu.$$
+In Lorenz gauge, 
+$$\partial_\mu A^\mu=0\implies\partial_\mu F^{\mu\nu}=\Box A^\mu-\partial^\nu(\Ccancel[red]{\partial_\mu A^\mu})\implies \Box A^\nu=\frac{4\pi}cJ^\nu.$$
+This is the electromagnetic wave equation.
+
+\paragraph{Green's Function}
+Let us solve for the Green's function. The equation we'd like to solve is 
+$$\Box_zD(z)=\delta^{(4)}(z).$$
+Working in the momentum space,
+$$D(z)=\frac 1{(2\pi)^4}\int\dd^4k\tilde D(k)e^{-ikz},\quad\delta^{(4)}=\frac 1{(2\pi)^4}\int\dd^4ke^{-ikz},\quad\Box=-k_\mu k^\mu,$$
+we obtain 
+$$\tilde D(k)=-\frac 1{k_\mu k^\mu}\implies D(z)=-\frac 1{(2\pi)^4}\int\dd^3k_se^{-i\mathbf k\cdot\mathbf z}\int_{\mathbb R}\dd k_0\frac{e^{-ikz_0}}{k^2_0-k^2_s}.$$
+For the advanced propagator prescription ($\dd k_0$ integral runs above the real axis), we have, 
+\begin{align*}
+    \int_{\mathbb R}\dd k_0\frac{e^{-ikz_0}}{k_0^2-k_s^2}=\begin{cases}0&z_0<0\\\frac{2\pi}{k_s}\sin(k_sz_0)&z_0>0\end{cases}.
+\end{align*}
+Note that $z_0<0$ corresponds to closing the contour on the upper half plane, and $z_0>0$ corresponds to closing the contour on the lower half plane. Therefore, 
+\begin{align*}
+    D(z)&=\frac 1{(2\pi)^4}\int\dd^3k_s\Theta(z_0)\left[\frac{2\pi}{k_s}\sin(k_sz_0)\right]e^{-i\mathbf k_x\cdot\mathbf z}\\
+    &=\frac{\Theta(z_0)}{(2\pi)^3}\int\dd k_sk_s^2\sin\theta\dd\theta\dd\phi e^{-ik_sz\cos\theta}\frac{\sin(k_sz_0)}{k_s}\\
+    &=\frac{\Theta(z_0)}{2\pi^2z}\int^\infty_{-\infty}\dd k_s\sin(k_sz)\sin(k_sz_0)\\
+    &=\frac{\Theta(z_0)}{4\pi z}\delta(z_0-z).
+\end{align*}
+Note that I've been using $z$ as $\abs{\mathbf z}$.
+
+With $\delta(z_0^2-z^2)=\frac 1{2z}[\delta(z_0+z)+\delta(z_0-z)]$, we can finally write
+$$D(z)=\frac{\Theta(z_0)\delta(z_\mu z^\mu)}{2\pi}.$$
+
+\paragraph{Moving Charge, Causality}
+Consider a moving charge. Its four-current can be written 
+$$J^\nu=e\int\dd\tau\cdot cv^\nu(\tau)\delta^{(4)}(x-r(\tau)).$$
+Using the Green's function, we obtain
+\begin{align*}
+    A^\nu(x)&=\frac{4\pi}c\int\dd^4x'J^\nu(x')D(x-x')\\
+    &=\frac{4\pi}c\int\dd^4x'\Theta(x_0-x'_0)\delta((x-x')^2)\int\dd\tau\cdot cev^\alpha(\tau)\delta^{(4)}(x'-r(\tau))\\
+    &=2\int\dd\tau\cdot cev^\nu(\tau)\cdot\Theta(x_0-r_0(\tau))\cdot\delta((x-r(\tau))^2)
+\end{align*}
+We note that 
+\begin{itemize}
+    \item The delta function ensures that only light-like separation contributes to $A$;
+    \item The theta function ensures causality.
+\end{itemize}
+
+\paragraph{Lienard-Wiechert Potential}
+The potential of a moving charge is given 
+$$A^\mu=-e\frac{v^\nu}{v_\mu(x-r(\tau)^\mu}$$
+
+\end{document}

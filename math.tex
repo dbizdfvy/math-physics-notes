@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{yehyun}
+\usepackage{physics}
+
+\title{Notes on Mathematics}
+\author{Yehyun Choi}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section{Lie Theory}
+\definition A group $(G,\circ)$ is a set $G$, together with a binary operation $\circ$ defined on $G$, that satisfies the following axioms
+\begin{enumerate}
+    \item Closure: For $g_1,g_2\in G,g_1\circ g_2\in G$;
+    \item Identity element: There exists an identity $e\in G$ such that for $g\in G,g\circ e=g=e\circ g$;
+    \item Inverse element: For each $g\in G$, there exists an inverse element $g^{-1}\in G$ such that $g\circ g^{-1}=e=g^{-1}\circ g$;
+    \item Associativity: For all $g_1,g_2,g_3\in G,g_1\circ(g_2\circ g_3)=(g_1\circ g_2)\circ g_3.$
+\end{enumerate}
+
+\definition A Lie group is a group, which is also a differentiable manifold. Furthermore, the group operation $\circ$ must induce a differentiable map of the manifold into itself. 
+
+\definition An isomorphism is a one-to-one map $\Pi$ that preserves the product structure 
+$$\Pi(g_1)\Pi(g_2)=\Pi(g_1g_2),\forall g_1,g_2\in G.$$
+
+\definition A Lie algebra is a vector space $\mathfrak g$ equipped with a binary operation $[,]:\mathfrak g\times\mathfrak g\to\mathfrak g$. The binary operation satisfies:
+\begin{enumerate}
+    \item Bilinearity: $\comm{aX+bY}{Z}=a\comm{X}{Z}+b\comm{Y}{Z}$ and $\comm{Z}{aX+bY}=a\comm{Z}{X}+b\comm{Z}{Y}$, for any $a,b,$ and $X,Y,Z\in\mathfrak{g}$.
+    \item Anticommutativity: $\comm{X}{Y}=-\comm{Y}{X},\quad\forall X,Y\in\mathfrak{g}$
+    \item Jacobi Identity: $\comm{X}{\comm{Y}{Z}}+\comm{Z}{\comm{X}{Y}}+\comm{Y}{\comm{Z}{X}}=0.$
+\end{enumerate}
+
+\pagebreak
+
+
+
+\example $O(2)$ is a group of all 2-dimensional matrices that satisfy $O^\intercal O=I$ (or preserve the length of vectors unchanged and a single point) with matrix multiplication. Its elements are of the form 
+$$R_\theta=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix},\quad P_x=\begin{pmatrix}-1&0\\0&1\end{pmatrix},\quad P_y=\begin{pmatrix}1&0\\0&-1\end{pmatrix},$$
+and all combinations. 
+\example $SO(2)$ is a group of all matrices that satisfy $O^\intercal O=I$ with $\det O=1$ with matrix multiplication.
+
+\example $U(1)$ is a group of all complex numbers that satisfy $U^*U=1$ with complex number multiplication. Its elements are of the form 
+$$R_\theta=\cos\theta+i\sin\theta,\quad \theta\in\mathbb R.$$
+
+There is an isomorphism 
+$$1\to\begin{pmatrix}1&0\\0&1\end{pmatrix},\quad i\to\begin{pmatrix}0&-1\\1&0\end{pmatrix}$$
+between $SO(2)$ and $U(1)$. 
+
+\example $SO(3)$ is a group of 3-dimensional matrices that satisfy $O^\intercal O=I$. Its elements are the form 
+$$R_x=\begin{pmatrix}1&0&0\\0&\cos\theta&-\sin\theta\\0&\sin\theta&\cos\theta\end{pmatrix},\quad R_y=\begin{pmatrix}\cos\theta&0&\sin\theta\\0&1&0\\-\sin\theta&0&\cos\theta\end{pmatrix},\quad R_z=\begin{pmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix},$$
+these can be thought of as basis rotations around the three axes.
+
+\example $U(2)$ is a group of unit quaternions - $q^\dag q=1$ with quaternion multiplication. Quaternions can be written as $q=a\mathbf 1+b\mathbf i+c\mathbf j+d\mathbf k$, with $\mathbf i^2=\mathbf j^2=\mathbf k^2=-1$ and $\mathbf{ijk}=-1$. 
+
+\textcolor{red}{Stopped p.35 physics from symmetry}
+
+\subsection{Prerequisites}
+
+
+\definition A Lie group is a group, which is also a differentiable manifold. Furthermore, the group operation $\circ$ must induce a differentiable map of the manifold into itself. 
+
+\definition A Lie algebra is a vector space $\mathfrak g$ equipped with a binary operation $[,]:\mathfrak g\times\mathfrak g\to\mathfrak g$. The binary operation satisfies:
+\begin{enumerate}
+    \item Bilinearity: $\comm{aX+bY}{Z}=a\comm{X}{Z}+b\comm{Y}{Z}$ and $\comm{Z}{aX+bY}=a\comm{Z}{X}+b\comm{Z}{Y}$, for any $a,b,$ and $X,Y,Z\in\mathfrak{g}$.
+    \item Anticommutativity: $\comm{X}{Y}=-\comm{Y}{X},\quad\forall X,Y\in\mathfrak{g}$
+    \item Jacobi Identity: $\comm{X}{\comm{Y}{Z}}+\comm{Z}{\comm{X}{Y}}+\comm{Y}{\comm{Z}{X}}=0.$
+\end{enumerate}
+
+\definition A representation is a map between group element $g\in G$ and a linear transformation $R(g)$ of vector space $V$ such that 
+\begin{enumerate}
+    \item $R(e)=I$; identity element is identity transformation;
+    \item $R(g^{-1})=(R(g))^{-1}$; inverse element is mapped to inverse transformation;
+    \item $R(g)\circ R(h)=R(gh)$; structure is preserved.
+\end{enumerate}
+
+\example For example
+\begin{itemize}
+    \item $S^1=U(1)\leftrightarrow SO(2)$
+    \item $S^3=SU(2)\rightarrow SO(3)$ with lie algebra $\comm{J_i}{J_j}=i\epsilon_{ijk}J_k$. Note $SU(2)\rightarrow SO(3)$ is two-to-one.
+\end{itemize}
+
+\subsection{SU(2) Representations}
+\paragraph{One-Dimensional Representation}
+This representation is trivial because the 1x1 generators commute and hence the transformations are the identity.
+
+\paragraph{Two-Dimensional Representation}
+The states are $j=\frac 12$, $m=\pm\frac 12$, and the generators are 
+$$J_i=\frac 12\sigma_i,\quad J_1=\frac 12\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad J_2=\frac 12\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad J_3=\frac 12\begin{pmatrix}1&0\\0&-1\end{pmatrix}.$$
+\paragraph{Three-Dimensional Representation}
+The generators are 
+$$J_1=\frac 1{\sqrt 2}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix},\quad J_2=\frac 1{\sqrt 2}\begin{pmatrix}0&-i&0\\i&0&-i\\0&i&0\end{pmatrix},\quad J_3=\begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix}.$$
+
+\subsection{Lorentz Group}
+The Lorentz group is defined such that 
+$$\Lambda^\intercal\eta\Lambda=\eta,\quad \eta=\begin{pmatrix}1&&&\\&-1&&\\&&-1&\\&&&-1\end{pmatrix}\implies\det\Lambda=\pm 1,\quad\Lambda^0_0=\pm\sqrt{1+\sum_i(\Lambda^i_0)^2}.$$
+
+We take $L^\uparrow_+$ to be $\det\Lambda=1$, $\Lambda^0_0\ge 1$ to be the proper Lorentz group.
+\end{document}

@@ -1,0 +1,71 @@
+\usepackage[legalpaper, portrait, margin=0.5in]{geometry}
+
+%\Ccancel[color]{text}  
+%colored strikthrough.
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+
+%abs and norm, adjusting talless of left and right brackets
+\usepackage{amsmath}
+\newcommand{\abs}[1]{ \left\lvert#1\right\rvert} % absolute value: single vertical bars
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert} % norm: double vertical bars
+
+%"ordinary derivative"
+%usage: \ode{y}{x} will output dy/dx
+\newcommand{\ode}[2]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
+\newcommand{\pde}[2]{\ensuremath{%
+		\frac{\partial #1}{\partial #2}}}
+
+%nth ordinary/partial derivative
+%usage: \ode 3yx will output d^3y/dx^3.
+\newcommand{\oden}[3]{\ensuremath{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}{#3}^{#1}}}}
+\newcommand{\pden}[3]{\ensuremath{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}}}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+\usepackage{enumitem}
+
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\setcounter{tocdepth}{2} 
+
+\usepackage{url}    %url
+\usepackage{amsthm}
+\usepackage{bbm} %identity operator 1
+\usepackage{simpler-wick} %wick diagrams
+\usepackage{mathtools}
+\usepackage{physics} 
+\usepackage{tensor} %for tensor ordering
+\usepackage{cancel} %cancel
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}{Lemma}[section]
+
+
+\newtheorem{axiom}{Axiom}[section]
+
+\newtheorem{proposition}{Proposition}[section]
+
+\newtheorem{corollary}{Proposition}[section]
+
+
+\newtheorem*{example}{\textit{Example}}
+
+\newcommand\normord[1]{{:}\mkern1mu#1\mkern1.6mu{:}}
+
+\usepackage{amsmath, amssymb}
+
+%\usepackage{tikz-feynman}
+\usepackage{tikz}
+
+\usepackage{slashed}
+
+
+
+\numberwithin{equation}{section}
