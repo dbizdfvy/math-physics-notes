@@ -767,7 +767,7 @@ In a more practical form, \eqref{41a} can be written as
 \subsection{Quantization of Scalar Fields}
 The correlation function, in terms of path integrals, is 
 \begin{equation}
-    \bra\Omega T\phi_H(x_1)\phi_H(x_2)\ket\Omega=\lim_{T\to\infty(1-i\epsilon)}\frac{\int\mathcal D\phi\phi(x_1)\phi(x_2)\exp\left[i\int^T_{-T}\dd^4x\mathcal L\right]}{\int\mathcal D\phi\exp\left[i\int^T_{-T}\dd^4x\mathcal L\right]}
+    \bra\Omega T\phi_H(x_1)\phi_H(x_2)\ket\Omega=\lim_{T\to\infty(1-i\epsilon)}\frac{\int\mathcal D\phi\phi(x_1)\phi(x_2)\exp\left[i\int^T_{-T}\dd^4x\mathcal L\right]}{\int\mathcal D\phi\exp\left[i\int^T_{-T}\dd^4x\mathcal L\right]}\label{4correlation}
 \end{equation}
 Consider a non-interacting real scalar field ($\mathcal L_0=\frac 12(\partial_\mu\phi)^2-\frac 12m^2\phi^2.$) In the momentum space, defined 
 $$\phi(x_i)=\frac 1V\sum_{n}e^{-ik_n\cdot x_i}\phi(k_n),$$
@@ -796,5 +796,59 @@ Taking the continuum limit of the fraction, we obtain
     \bra 0T\phi(x_1)\phi(x_2)\ket 0=\int\frac{\dd^4k}{(2\pi)^4}\frac{ie^{-ik\cdot(x_1-x_2)}}{k^2-m^2+i\epsilon}.
 \end{equation}
 Similarly, the four-point function is nonzero for when two of its fields are equal but opposite in sign.
+
+It is useful to consider the \textbf{generating functional} when computing the correlation functions. We define 
+\begin{equation}
+    Z[J]\equiv\int\mathcal D\phi\exp\left[i\int\dd^4x\left[\mathcal L+J(x)\phi(x)\right]\right].
+\end{equation}
+The two-point function is simply 
+\begin{equation}
+    \bra 0T\phi(x_1)\phi(x_2)\ket 0=\left.\frac 1{Z[J=0]}\left(\frac 1{i^2}\frac{\delta^2}{\delta J(x_1)\delta J(x_2)}\right)Z[J]\right|_{J=0},
+\end{equation}
+from \eqref{4correlation}.
+
+For the free scalar field theory, we can explicitly find the generating functional. 
+\begin{align*}
+    Z[J]&\equiv\int D\phi\exp\left[i\int\dd^4x\left[\frac 12\phi(-\partial^2-m^2+i\epsilon)\phi+J(x)\phi(x)\right]\right]\\
+    &=\int\mathcal D\phi'\exp\left[i\int\dd^4x\left[\frac 12\phi'(-\partial^2-m^2+i\epsilon)\phi'-\frac 12J(-\partial^2-m^2+i\epsilon)^{-1}J\right]\right]\\
+    &=Z_0\exp\left[-\frac 12\int\dd^4x\int\dd^4yJ(y)D_F(y-x)J(x)\right]
+\end{align*}
+where $\phi'=\phi+(-\partial^2-m^2+i\epsilon)^{-1}J$. Note that to compute $(-\partial^2-m^2+i\epsilon)^{-1}$ we need to work in the momentum space.
+
+The four-point function is then 
+\begin{align*}
+    \bra 0T\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4)\ket 0&=\frac 1{Z_0}\prod^4_{j=1}\left(\frac 1i\frac{\delta}{\delta J(x_j)}\right)e^{-\frac 12J_xD_{xy}J_y}\\
+    &=\frac 1{Z_0}\prod^3_{j=1}\left(\frac 1i\frac{\delta}{\delta J(x_j)}\right)\left(-J_xD_{x4}e^{-\frac 12J_xD_{xy}J_y}\right)\\
+    &=\frac 1{Z_0}\prod^2_{i=1}\left(\frac 1i\frac{\delta}{\delta J(x_j)}\right)\left(\left(-D_{34}+J_xD_{x4}J_yD_{y3}\right)e^{-\frac 12J_xD_{xy}J_y}\right)\\
+    &=\frac 1{Z_0}\prod^1_{j=1}\left(\frac 1i\frac\delta{\delta J(x_j)}\right)\left(\left(J_xD_{x2}D_{34}+D_{24}J_yD_{y3}+J_xD_{x4}D_{23}\right)e^{-\frac 12J_xD_{xy}J_y}\right)\\
+    &=(D_{12}D_{34}+D_{24}D_{13}+D_{14}D_{23}).
+\end{align*}    
+
+\subsection{Quantization of EM Field}
+The functional integral  for the electromagnetic theory is 
+$$\int\mathcal DAe^{iS[A]},\quad S=\int\dd^4x\left[-\frac 14(F_{\mu\nu})^2\right]=\frac 12\int\dd^4xA_\mu(\partial^2g^{\mu\nu}-\partial^\mu\partial^\nu)A_\nu.$$
+This expression vanishes if $\tilde A_\mu=k_\mu\alpha(k)$ for any scalar function $\alpha(k)$, meaning the path integral is badly divergent.
+
+Let $G(A)=0$ be a gauge-fixing condition; for example, $G(A)=\partial_\mu A^\mu$ for Lorentz gauge. We consider the identity 
+\begin{equation}
+    1=\int\mathcal D\alpha(x)\delta(G(A^\alpha))\det\left(\frac{\delta G(A^\alpha)}{\delta\alpha}\right),\quad A^\alpha_\mu(x)=A_\mu(x)+\frac 1e\partial_\mu\alpha(x).
+\end{equation}
+Note that $\det\left(\frac{\delta G(A^\alpha)}{\delta\alpha}\right)=\det\left(\frac{\partial^2}e\right)$ is constant. With this condition, the functional integral becomes 
+\begin{equation}
+    \int\mathcal DAe^{iS[A]}=\det\left(\frac{\delta G(A^\alpha)}{\delta\alpha}\right)\int\mathcal D\alpha\int\mathcal DAe^{iS[A]}\delta(G(A)),
+\end{equation}
+where we have used the gauge invariance of $S$ and the fact that $A\to A^\alpha$ is a simple shift. Consider letting $G(A)=\partial^\mu A_\mu(x)-\omega(x)$ for a generalization of the Lorentz gauge condition and integrate over all $\omega(x)$ with a weighting function:
+\begin{align*}
+    \int\mathcal DAe^{iS[A]}&=N(\xi)\int\mathcal D\omega\exp\left[-i\int\dd^4x\frac{\omega^2}{2\xi}\right]\det\left(\frac 1e\partial^2\right)\left(\mathcal D\alpha\right)\int\mathcal DAe^{iS[A]}\delta(\partial^\mu A_\mu-\omega(x))\\
+    &=N(\xi)\det\left(\frac 1e\partial^2\right)\left(\int\mathcal D\alpha\right)\int\mathcal DAe^{iS[A]}\exp\left[-i\int\dd^4x\frac 1{2\xi}(\partial^\mu A_\mu)^2\right].
+\end{align*}
+Hence, the correlation function is 
+\begin{equation}
+    \bra\Omega T\mathcal O(A)\ket\Omega=\lim_{T\to\inf(1-i\epsilon)}\frac{\int\mathcal DA\mathcal O(A)\exp\left[i\int^T_{-T}\dd^4x\left[\mathcal L-\frac 1{2\xi}(\partial^\mu A_\mu)^2\right]\right]}{\int\mathcal DA\exp\left[i\int^T_{-T}\dd^4x\left[\mathcal L-\frac 1{2\xi}(\partial^\mu A_\mu)^2\right]\right]}.
+\end{equation}
+The photon propagator is 
+\begin{equation}
+    \tilde D^{\mu\nu}_F(k)=-\frac{-i}{k^2+i\epsilon}\left(g^{\mu\nu}-(1-\xi)\frac{k^\mu k^\nu}{k^2}\right).
+\end{equation}
 
 \end{document}
