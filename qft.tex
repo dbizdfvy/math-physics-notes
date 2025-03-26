@@ -20,12 +20,8 @@
 
 The field viewpoint is needed because quantum mechanics breaks causality. This can be shown from:
 \begin{enumerate}
-    \item Explicitly calculating the propagator between $\mathbf x$ and $\mathbf x_0$:
-    \begin{align*}
-        U&=\bra{\mathbf x}\exp\left(-it\sqrt{\mathbf p^2+m^2}\right)\ket{\mathbf x_0}=\frac 1{(2\pi^2\abs{\mathbf x-x_0)}}\int^\infty_0\dd p\cdot p\sin(p\abs{\mathbf x-\mathbf x_0})e^{-it\sqrt{p^2+m^2}}.
-    \end{align*}
-    For rational function of $x$ and $t$, $U(t)\sim e^{-m\sqrt{x^2-t^2}}$\footnote{\url{https://physics.stackexchange.com/a/105049}}.
-    \item Noting that all Hermitian operators are observable; in relativity, this cannot be true because 2 spatially separated observables cannot affect each other. In other words, we want $\comm{O_1}{O_2}=0$ for spatially separated $O_1$, $O_2$.
+    \item Explicitly calculating the propagator between $\mathbf x$ and $\mathbf x_0$. For rational function of $x$ and $t$, $U(t)\sim e^{-m\sqrt{x^2-t^2}}$ with no cutoff\footnote{\url{https://physics.stackexchange.com/a/105049}}.
+    \item Recalling that all Hermitian operators are observable; in relativity, this cannot be true because 2 spatially separated observables cannot affect each other. In other words, $\comm{O_1}{O_2}\ne 0$ for spatially separated $O_1$, $O_2$.
 \end{enumerate}
 
 With Lorentz transformations, we can prove that QFT is \textbf{causal} - in other words, if $(x-y)^2<0$, then $\comm{O(x)}{O(y)}=0$, or spacelike operators commute. To see this, we let $\phi(x)=\phi^-(x)+\phi^+(x)$, where each term corresponds to the creation and annihilation terms;
@@ -33,7 +29,7 @@ $$\phi^-(x)=\int\frac{\dd^3k}{\sqrt{(2\pi)^32\omega_k}}a_ke^{-ik\cdot x},\quad \
 Then we can rewrite the commutator as 
 \begin{align*}
     \comm{\phi(x)}{\phi(y)}&=\comm{\phi^-(x)+\phi^+(x)}{\phi^-(y)+\phi^+(y)}=\comm{\phi^-(x)}{\phi^+(y)}+\comm{\phi^+(x)}{\phi^-(y)}\\
-    &=\phi^-(x)\phi^+(y)-\phi^-(y)\phi^+(x)
+    &=\phi^-(x)\phi^+(y)-\phi^-(y)\phi^+(x).
 \end{align*}
 However, $\phi^-(x)\phi^+(y)=\phi^-(y)\phi^+(x)$ if $(x-y)^2<0$, because there's a proper Lorentz transformation between $x-y$ and $y-x$. One could think that causality is restored as the amplitude of the particle propagating from $y$ to $x$ is exactly canceled out by the antiparticle propagating from $x$ to $y$. 
 
