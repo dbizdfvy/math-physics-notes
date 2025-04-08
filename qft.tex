@@ -168,6 +168,318 @@ $$\mathcal L=\partial_\mu\psi^\dag\partial^\mu\psi-m^2\psi^\dag\psi,\quad J_\mu=
 
 \pagebreak
 
+\section{Spin 1/2 Field Theory}
+
+\subsection{Groups}
+
+\textcolor{red}{Lec 22}
+
+The \textbf{Poincare group} $P=\{(\Lambda,a)\}$ with multiplication $(\Lambda_1,a_1)\cdot (\Lambda_2,a_2)=(\Lambda_1\Lambda_2,\Lambda_1a_2+a_1)$ is the group of isometry transformations (Lorentz + translations, $x'=\Lambda x+a$) of the Minkowski spacetime. 
+
+The basic subgroups include homogeneous Lorentz group $L=\{(\Lambda,0)\}$ and translations $T_4=\{(\mathbbm 1,a)\}$.
+
+The \textbf{Lorentz Group} $\{\Lambda\}$ is a matrix group defined $\Lambda^\intercal g\Lambda=g$, where $g$ is the Minkowski $+,-,-,-$ metric. The generators can be written 
+$$\Lambda^\intercal g\Lambda=(\mathbbm 1-\omega^\intercal)g(\mathbbm 1-\omega)=g\implies\omega g=-g\omega^\intercal,\quad \omega^{\mu\nu}=-\omega^{\nu\mu}.$$
+From antisymmetry, there are 6 real parameters over $\mu\nu$. Per convention, the generators $\omega$ are typically written 
+$$-\omega=\frac i2\omega^{\mu\nu}S_{\mu\nu},$$
+where $S_{\mu\nu}$ are fixed matrices. Its lie algebra is 
+$$\comm{S_{\mu\nu}}{S_{\omega\rho}}=-i(g_{\mu\omega}S_{\nu\rho}+g_{\nu\rho}S_{\mu\omega}-g_{\mu\rho}S_{\nu\omega}-g_{\nu\omega}S_{\mu\rho}).$$
+
+For example, the fundamental/vector (1/2,1/2) representation of $S_{\mu\nu}$ is
+$$(S_{\mu\nu})^{\lambda\rho}=i(\delta^\lambda_\mu\delta^\rho_\nu-\delta^\lambda_\nu\delta^\rho_\mu).$$
+If we define 
+\begin{itemize}
+    \item $S^{0i}=-S^{i0}=K^i$ generator of boost, $\omega^{i0}=-\omega^{0i}$ rapidity;
+    \item $S^{ik}=\epsilon^{ikl}J^l$ generator of rotation, $\omega^{ik}=\epsilon^{ikl}\omega^l$ rotation angle,
+\end{itemize}
+then 
+$$\comm{J^i}{J^k}=i\epsilon^{ikl}J_l,\quad\comm{J^i}{K^i}=i\epsilon^{ikl}K_l,\quad\comm{K^i}{K^l}=i\epsilon^{ikl}J_l.$$
+Note that $\{K\}$ isn't a subgroup.
+
+Lastly, because representation preserves structure, we can simply take the matrix exponential to get the finite transformations:
+$$\Lambda=\exp\left(\frac i2\omega^{\mu\nu}S_{\mu\nu}\right)=\exp\left(i(\omega\cdot\mathbf J+\omega u\cdot\mathbf K)\right).$$
+
+\subsection{Representations}
+\textcolor{red}{Lec 23-25}
+
+First, we introudce fields and states:
+\begin{itemize}
+    \item \textbf{Fields} are operators on Hilbert space. They are finite dimensional representations of the Lorentz group - the position is already the argument of the field - and transform per the Poincare group. We write
+    $$U(\Lambda,a)\circ\phi_\alpha(x)\circ U^{-1}(\Lambda,a)=D_{\alpha\beta}\phi_\beta(\Lambda x+a).$$
+    $D_{\alpha\beta}$ is the Lorentz transformation matrix, which isn't necessarily unitary.
+    \item \textbf{States} are vectors in Hilbert space. They are representations of the Poincare group - since the Casimir elements have eigenvalues that describe the mass and spin - and transform per the Lorentz group (states don't depend on the position) Therefore, we simply write 
+    $$\Lambda:\ket k\to U(\Lambda)\ket k.$$
+\end{itemize}
+
+\subsubsection{Representations of the Poincare Group}
+
+We use Wigner's classification on irreducible representations of the Poincare group. Given a state's momentum, we can find orbit $\hat p$ for which there exists $L(p)$ such that $L(p)\ket{\hat p}=\ket p$. The little group denotes the isometry group of $\hat p$ (formally defined $\{\Lambda\}$ such that $\Lambda\hat p=\hat p$.)
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+\hline
+ Orbit/characteristic momentum & $\hat{p}$ & Little group $H\hat{p}$ \\ 
+ \hline
+ $p^2=m^2,\,p^2>0$ & $(m,0)$ & SO(3) $\sim$ SU(2) \\ 
+ \hline
+ $p^2=0,\,p^0>0$ & $(1,\hat{e}_3)$ & $E_2$ \\ 
+ \hline
+ $p=0$ & $(0,0)$ & $L^\uparrow_+\sim\text{SL}(2,\mathbb C)$\\
+ \hline
+ $p^2=-m^2$ & $(0,m\hat e_3)$ & SU(1,1)\\
+ \hline
+\end{tabular}
+\end{center}
+
+Now, we define the representation of $H\hat p$ as 
+$$U(\Lambda)\ket{\hat p,\alpha}=D_{\alpha\alpha'}(\Lambda)\ket{\hat p,\alpha'},\quad\Lambda\in H\hat p.$$
+
+Given the representation of $H\hat p$, we can find the representation of the general $\Lambda\notin H\hat p$ as well. Given $\ket{p,\alpha}\equiv U(L(p))\ket{\hat p,\alpha}$,
+\begin{align*}
+    U(\Lambda)\ket{p,\alpha}&=\left[U(L(\Lambda p))U(L^{-1}(\Lambda p))\right]U(\Lambda)U(L(p))\ket{\hat p,\alpha}\\
+    &=U(L(\Lambda p))\left[U(L^{-1}(\Lambda p))U(\Lambda)U(L(p))\right]\ket{\hat p,\alpha}\\
+    &=U(L(\Lambda p))D_{\alpha\alpha'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\hat p,\alpha}\\
+    &=D_{\alpha\alpha'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,\alpha'}.
+\end{align*}
+We have used the fact that $U(L^{-1}(\Lambda p))U(\Lambda)U(L(p))$ is a representation of the little group and $D_{\alpha\alpha'}$ is a matrix.
+
+\paragraph{Case 1 - $\hat p=(m,0),\,H\hat p=\text{SO}(3)\sim\text{SU}(2)$}
+
+The SU(2) group can be represented by the particle's $J^2$ and $J_3$ values. We let $\ket{\hat p,\alpha}\to\ket{\hat p,j\sigma}$, where $j$ is total spin and $\sigma$ is the third component. The D matrix is written 
+$$U(\Lambda)\ket{p,j\sigma}=D^j_{\sigma\sigma'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,j\sigma'}.$$
+
+For moving particles, $\comm{J^i}{p^k}=i\epsilon^{ikl}p^l\ne 0$, which necessitates the helicity, defined 
+$$\Sigma=\frac{\mathbf J\cdot\mathbf p}{\abs{\mathbf p}}\implies\comm{p^i}{\Sigma}=\comm{p^i}{J^k}\frac{p^k}{\abs{\mathbf p}}=0.$$
+
+Therefore, for moving particles, we write $\ket{p,j\sigma}\to\ket{p,j\lambda}$ with $\Sigma\ket{p,j\lambda}=\lambda\ket{p,j\lambda}.$
+
+\paragraph{Case 2 - $\hat p=(1,\hat e_3),\,H\hat p=E_2$} The $E_2$ group can be written 
+$$\Lambda\hat p=\hat p\implies\omega\hat p=0,\quad\begin{pmatrix}0&u^1&u^2&u^3\\-u^1&0&\omega^{12}&\omega^{13}\\-u^2&-\omega^{12}&0&\omega^{23}\\-u^3&-\omega^{13}&-\omega^{23}&0\end{pmatrix}\begin{pmatrix}1\\0\\0\\1\end{pmatrix}=\begin{pmatrix}u_3\\-u_1+\omega^{13}\\-u_2+\omega^{23}\\-u_3\end{pmatrix}.$$
+Therefore there are only three generators, $J_3,J_1+K_2,J_2-K_1$. If we let $H^1=J^1+K^2,H^2=J^2-K^1$, the algebra becomes $\comm{J^3}{H^{1,2}}=\pm iH^{2,1}$ and $\comm{H^1}{H^2}=0$, showing $E_2$ is a semidirect product of SO(2) and $T_2$: $E_2=\text{SO}(2)\rtimes T_2$
+
+To find the irreducible representations of $E_2$, we use Wigner's classification again. For $\mathbf H=\begin{pmatrix}H^1\\H^2\end{pmatrix}$ with $\mathbf H\ket{\Pi,\alpha}=\Pi\ket{\Pi,\alpha}$, 
+\begin{center}
+\begin{tabular}{|c|c|c|}
+     \hline
+     Orbit & $\hat\Pi$ & $H\hat\Pi$\\
+     \hline
+     $\Pi^2=c^2$ & $(1,0)$ & $e$; anything\\
+     \hline
+     $\Pi^2=0$ & $(0,0)$ & SO(2)\\
+     \hline
+\end{tabular}
+\end{center}
+
+$\hat\Pi=(1,0)$ corresponds to continuous spin states, which we will neglect here. 
+
+For $\hat\Pi=(0,0)$, the little group is SO(2), which has a one-dimensional representation $D(R(\omega))=e^{i\omega\lambda}$ with $\lambda=0,\pm\frac 12,\pm 1,\pm\frac 32,\cdots$.
+
+Therefore, for massless particles, we write $\ket{p,\alpha}\to\ket{p,\lambda}$ with 
+$$U(\Lambda)\ket{p,\lambda}=e^{i\lambda\omega}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,\lambda}.$$
+
+$\lambda$ is called the helicity. Note that $\gamma$ doesn't have spin.
+
+\paragraph{Case 3 - $\hat p=(0,0)$, $H\hat p=L^\uparrow_+$}
+
+This case corresponds to the vacuum states. For simplicity, we choose the trivial representation $\ket 0$.
+
+\subsubsection{Weyl Spinor Representation of $\mathrm{SL}(n,\mathbbm C)\sim L^\uparrow_+$}
+
+Consider the Pauli matrices,
+$$\sigma^1=\begin{pmatrix}&1\\1&\end{pmatrix},\quad\sigma^2=\begin{pmatrix}&-i\\i&\end{pmatrix},\quad\sigma^3=\begin{pmatrix}1&\\&-1\end{pmatrix}.$$
+We define the 4-pauli vectors as 
+$$\sigma^\mu=(\mathbbm 1,\boldsymbol\sigma)\implies\sigma_\mu=(\mathbbm 1,-\boldsymbol\sigma),\quad\overline\sigma^\mu=(\mathbbm 1,-\boldsymbol\sigma).$$
+If we consider the 2x2 matrices $[x]=x^\mu\sigma_\mu$, for $A\in\mathrm{SL}(2,\mathbb C)$, we have that $[x]_A=A[x]A^\dag$ is a Lorentz transformation; 
+$$\det[x]=x^2,\quad x^2_A=\det[x]_A=\det(A[x]A^\dag)=x^2.$$
+From this, we can find four different representations for $L^\uparrow_+$:
+\begin{itemize}
+    \item Trivial representation; $\psi_\alpha\to A\indices{_\alpha^\beta}\psi_\beta\sim A\psi$
+    \item Conjugate representation; $\psi_{\dot\alpha}\to(A^*)\indices{_{\dot\alpha}^{\dot\beta}}\psi_{\dot\beta}\sim \psi A^\dag$
+    \item Transpose representation $\psi^\alpha\to ({A^\intercal}^{-1})\indices{^\alpha_\beta}\psi^\beta\sim\psi A^{-1}$
+    \item Hermite representation $\psi^{\dot\alpha}\to\bar A\indices{^{\dot\alpha}_{\dot\beta}}\psi^{\dot\beta}\sim\bar A\psi$. We define $\bar A=(A^\dag)^{-1}$.
+\end{itemize}
+Note that, because $L^\uparrow_+$ has $\det=1$, $A^{-1}=A^\intercal$ and therefore we only have lower indices. If we had a unitary representation, $\bar A=A$, and would've only undotted indices.
+
+Further, note that we use the levi-civita symbol to lower and raise indices:
+$$\epsilon^{\alpha\beta}=\epsilon_{\alpha\beta}=\epsilon^{\dot\alpha\dot\beta}=\epsilon_{\dot\alpha\dot\beta}=\begin{pmatrix}&1\\-1&\end{pmatrix}.$$
+
+From the condition that $\det A=1$, the generators must be such that $\Tr \omega=0\implies\omega=\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma$. Then, 
+$$A=\exp\left(\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma)\right),\quad\bar A=\exp\left(\frac i2\left(\boldsymbol\alpha-i\boldsymbol\beta\right)\cdot\boldsymbol\sigma\right).$$
+Therefore, the general representation of $\mathrm{SL}(2,\mathbb C)\sim L^\uparrow_+$ is 
+$$D^{m,n}=\varphi\indices{_{\alpha_1\cdots\alpha_m}^{\dot\beta_1\cdots\dot\beta_n}}=\exp\left(\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma\right)\exp\left(\frac i2\left(\boldsymbol\alpha-i\boldsymbol\beta\right)\cdot\boldsymbol\sigma\right).$$
+
+Another way to derive is to start by rewriting $\mathbf M=\frac 12(\mathbf J+i\mathbf K),\quad\mathbf N=\frac 12(\mathbf J-i\mathbf K)$. By writing this, $\mathbf M$ and $\mathbf N$ commute with each other and have their own $\mathfrak{su}(2)$ algebra. Therefore, 
+$$\Lambda=e^{i(\mathbf\omega\cdot\mathbf J+\mathbf v\cdot\mathbf k)}=e^{i\mathbf M\cdot(\mathbf w-i\mathbf v)}e^{i\mathbf N\cdot(\mathbf w+i\mathbf v)}.$$
+
+We now consider the (1/2,0) representation. We have 
+$$\mathbf M=\frac{\sigma}2,\quad\mathbf N=0\implies\mathbf J=\frac{\sigma}2,\quad\mathbf K=-\frac{i\sigma}2.$$
+The objects transform under this representation are called left-handed spinors $\psi_L$. These transform
+$$(\psi_L)_\alpha\to A\indices{_\alpha^\beta}\psi_\beta,\quad A\indices{_\alpha^\beta}=\exp\left(i\frac{w\cdot\sigma}{2}+\frac{u\cdot\sigma}2\right).$$
+
+Similarly, the (0,1/2) representation has
+$$\mathbf M=0,\quad \mathbf N=\frac{\sigma}2\implies \mathbf J=\frac{\sigma}2,\quad \mathbf K=\frac{i\sigma}2.$$
+The objects that transform under this representation are called right-handed spinors $\psi_R$. These transform
+$$(\psi_R)^{\dot\beta}\to\bar A\indices{^{\dot\alpha}_{\dot\beta}}(\psi_R)^{\dot\beta},\quad\bar A\indices{^{\dot\alpha}_{\dot\beta}}=\exp\left(i\frac{w\cdot\sigma}2-\frac{u\cdot\sigma}2\right).$$
+
+Lastly, the (1/2,1/2) representation can be written 
+$$(\psi_L)^\alpha(\sigma^\mu)_{\alpha\dot\beta}(\psi_R)^{\dot\beta}.$$
+This is an ordinary 4-vector; recall that $x^\mu\sim [x]\to A[x]A^\dag$.
+
+\subsubsection{Dirac Spinor Representation}
+
+For theories with parity symmetry, Dirac spinors are used to include both Left-handed spinors as well as Right-handed spinors. We let $\psi=\begin{pmatrix}\chi_\alpha\\\bar\psi^{\dot\alpha}\end{pmatrix}$. The Lorentz transformation is 
+\begin{align*}
+    D(\Lambda)&=\begin{pmatrix}\exp\left(\frac i2\boldsymbol\sigma(\boldsymbol\omega-i\mathbf u)\right)&0\\0&\exp\left(\frac i2\boldsymbol\sigma(\boldsymbol\omega+i\mathbf u)\right)\end{pmatrix}\\
+    &=\exp\left(i\boldsymbol\omega\cdot\boldsymbol\Sigma+\frac 12\mathbf u\cdot\boldsymbol\alpha\right),\quad\boldsymbol\Sigma=\frac 12\begin{pmatrix}\boldsymbol\sigma&0\\0&\boldsymbol\sigma\end{pmatrix},\quad\boldsymbol\alpha=\begin{pmatrix}-\boldsymbol\sigma&0\\0&\boldsymbol\sigma\end{pmatrix}.
+\end{align*}
+$\boldsymbol\Sigma$ is a representation of $\mathbf J$, and $\boldsymbol\alpha$ is a representation of $\mathbf K$. The generator algebra is such that
+$$\Sigma^i\Sigma^k=\alpha^i\alpha^k=\delta^{ik}+i\epsilon^{ikl}\Sigma^l,\quad\comm{\Sigma^i}{\gamma^0}=\comm{\alpha^i}{\gamma^0}=0.$$
+
+where
+$$\gamma^0=\begin{pmatrix}0&\mathbbm 1\\\mathbbm 1&0\end{pmatrix},\quad\gamma^i=\begin{pmatrix}0&\sigma^i\\-\sigma^i&0\end{pmatrix}.$$
+These are known as the Dirac gamma matrices. These have an algebra,
+$$\acomm{\gamma^\mu}{\gamma^\nu}=2g^{\mu\nu}\times\mathbbm 1.$$
+
+\subsection{Weyl Formalism}
+
+\textcolor{red}{Lec 25-26}
+
+We want a Lagrangian that:
+\begin{itemize}
+    \item Is Lorentz invariant,
+    \item Has at most 2 derivatives and 2 fields,
+    \item Has a real action,
+    \item Has a U(1) symmetry ($\chi\to e^{i\alpha}\chi$). Experimentally, every 1/2 has a conserved charge, for example, leptop/baryon number, electric charge.
+\end{itemize}
+
+The kind of left-handed objects we can have are 
+$$\chi_\alpha,\quad\chi^*_{\dot\alpha},\quad\partial^\mu,\quad\sigma^\mu_{\alpha\dot\alpha},\quad\bar\sigma^{\mu\dot\alpha\alpha},\quad\epsilon_{\alpha\beta}.$$
+
+For a bilinear $\mathcal L$, there are three possibilities:
+\begin{enumerate}
+    \item $\mathcal L=c\chi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\beta}(\partial_\mu\chi_\beta)$. Taking the complex conjugate then integrating by parts, realness requires that $c^*$ is purely imaginary; from convention, we choose $c=i$.
+    \item $\mathcal L=\chi_\alpha\epsilon^{\alpha\beta}\chi_\beta$. This is not U(1) invariant. This corresponds to the Majonara mass, for neutrinos without charge.
+    \item $\mathcal L=(\partial_\mu\chi_\alpha)\epsilon^{\alpha\beta}(\partial^\mu\chi_\beta)$. This is not U(1) invariant either.
+\end{enumerate}
+Therefore, we write the action
+\begin{equation}
+    S=\int\dd^4x\,i\chi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\alpha}(\partial_\mu\chi_\alpha)=\int\dd^4x\,i\bar\chi\slashed\partial\chi,\quad\slashed\partial\equiv\bar\sigma^\mu\partial_\mu.
+\end{equation}
+
+From the Euler-Lagrange equation, we obtain
+\begin{equation}
+    \bar\sigma^{\mu\dot\alpha\beta}\partial_\mu\chi_\beta=0,
+\end{equation}
+known as the (left-handed) Weyl equation.
+
+This is consistent with the massless Klein-Gordon equation. 
+
+The plain wave solution is 
+\begin{align*}
+    \chi_L&=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a_{p_-}\begin{pmatrix}0\\1\end{pmatrix}e^{-ipx}+b^\dag_{p_+}\begin{pmatrix}1\\0\end{pmatrix}e^{ipx}\right]\\
+    \chi_L^\dag&=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a^\dag_{p_-}\begin{pmatrix}0\\1\end{pmatrix}e^{ipx}+b_{p_+}\begin{pmatrix}1\\0\end{pmatrix}e^{-ipx}\right].
+\end{align*}
+
+Similarly, the right-handed Lagrangian and the corresponding equation are
+$$\mathcal L=\pm i\psi^{*\alpha}\sigma^\mu_{\alpha\dot\beta}(\partial_\mu\psi^{\dot\beta})\implies\sigma^\mu_{\alpha\dot\beta}\partial_\mu\psi^{\dot\beta}=0.$$
+The plain wave solution is
+$$\psi_R=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a_{p-}\begin{pmatrix}1\\0\end{pmatrix}e^{-ipx}+b^\dag_{p_+}\begin{pmatrix}0\\1\end{pmatrix}e^{ipx}\right].$$
+
+
+\subsubsection{Majorana Theory}
+To add mass to our theory, we consider the Majorana mass term. The corresponding action is 
+$$S=\int\dd^4x\left[i\psi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\alpha}\partial_\mu\psi_\alpha-\frac m2\psi_\alpha\epsilon^{\alpha\beta}\psi_\beta+\text{h.c.}\right].$$
+The equations of motion are
+$$i\bar\sigma^{\mu\dot\alpha\beta}\partial_\mu\psi_\beta=m(\psi^*)^{\dot\alpha},\quad -i\partial_\mu\psi^*_{\dot\alpha}\bar\sigma^{\mu\alpha\beta}=m\psi^\beta.$$
+With the ansatz $\psi_\beta=x_\beta e^{-ipx}+y_\beta e^{ipx}$, we can reduce the equations to 
+$$(p\cdot\bar\sigma)x=my^\dag,\quad (p\cdot\bar\sigma)y=-mx^\dag,\iff(p\cdot\sigma)y^\dag=mx,\quad(p\cdot\sigma)x^\dag=-my.$$
+The solutions are such that 
+$$x_\alpha(p,s)=\sqrt{p\cdot\sigma}\chi_s,\quad y_\alpha(p,s)=(2s)\sqrt{p\cdot\sigma}\chi_s,$$
+giving us 
+$$\psi_\alpha(x)=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\sum_s\left(x_\alpha(p,s)a_{p,s}e^{-ipx}+y_\alpha(p,s)a^\dag_{p,s}e^{ipx}\right).$$
+Enforcing the commutator relations $\acomm{a_{\mathbf p,s}}{a^\dag_{\mathbf p',s'}}=\delta(\mathbf p-\mathbf p')\delta_{ss'}$, we obtain $\acomm{\chi_\alpha(\mathbf x,t)}{\chi^\dag_{\dot\beta}(\mathbf y,t)}=\sigma^0\delta(\mathbf x-\mathbf y)$.
+
+
+Note that the Majorana theory is not invariant under $U(1)$ transformations, suitable for neutrinos.
+\subsection{Dirac Theory}
+
+\subsubsection{Gamma Matrices}
+
+We define the Dirac gamma matrices (in \textbf{Weyl/Chiral basis}):
+
+$$\gamma^0=\begin{pmatrix}0&\mathbbm 1\\\mathbbm 1&0\end{pmatrix},\quad\gamma^\mu=\begin{pmatrix}0&\sigma^\mu\\\overline\sigma^\mu&0\end{pmatrix}$$
+The gamma matrices have respect the Clifford algebra and are Lorentz generators:
+$$\acomm{\gamma^\mu}{\gamma^\nu}=2g^{\mu\nu}\mathbbm 1,\quad\comm{\gamma^\mu}{\gamma^\nu}\frac i2=S^{\mu\nu}.$$
+The $\gamma^5$ matrix is defined $\gamma^5=\gamma_5=i\gamma^0\gamma^1\gamma^2\gamma^3$. It holds that 
+\begin{equation}
+    \gamma_5^2=1,\quad\gamma_5=\begin{pmatrix}-\mathbbm 1&0\\0&\mathbbm 1\end{pmatrix}.
+\end{equation}
+It is known as the Chirality operators, because one can project the Dirac spinors onto left/right handed Weyl spinors:
+\begin{equation}
+    P_L=\frac{1-\gamma_5}2=\begin{pmatrix}\mathbbm 1&\\&0\end{pmatrix},\quad P_R=\frac{1+\gamma_5}2=\begin{pmatrix}0&\\&\mathbbm 1\end{pmatrix}.
+\end{equation}
+
+\subsubsection{Dirac Formalism}
+
+To add mass to the theory while keeping U(1) symmetry, we consider a Lagrangian of the form 
+\begin{equation}
+    \mathcal L=i(\psi^\dag_L)_{\dot\alpha}\overline\sigma^{\mu\alpha\dot\beta}\partial_\mu\psi_{L\beta}+(\psi^\dag_R)^\alpha\sigma^\mu_{\dot\alpha\beta}\partial_\mu\psi^{\dot\beta}_R-m(\psi^\dag_R)^\alpha(\psi_{L\beta})-m(\psi_R)^\alpha(\psi^\dag_{L\beta})=\overline\psi(i\slashed\partial-m)\psi.
+\end{equation}
+The equation of motion is 
+\begin{equation}
+    (i\slashed\partial-m)\psi=0.
+\end{equation}
+Letting $\psi=\begin{pmatrix}x_\alpha\\y^{\dag\dot\beta}\end{pmatrix}e^{-ipx}$, we obtain, from the two-component spinor results, 
+\begin{equation}
+    \psi=u_{\mathbf p,s}e^{-ipx}+v_{\overline p,x}e^{ipx},\quad u_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_s\\\sqrt{p\cdot\sigma}\chi_s\end{pmatrix},\quad v_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_{-s}\\-\sqrt{p\cdot\sigma}\chi_{-s}\end{pmatrix}.
+\end{equation}
+By definition, $(\slashed p-m)u=(\slashed p+m)v=0$. It holds that $u^\dag u=2E_p$ and $\overline uu=2m$.
+
+Furthermore, 
+\begin{equation}
+    \sum_su_s\overline u_s=(\slashed p+m),\quad\sum_sv_s\overline v_s=(\slashed p-m).
+\end{equation}
+This result is known as the spin sum statistics.
+
+The Dirac field is quantinized as 
+\begin{equation}
+    \psi(x)=\int\frac{\dd^3}{\sqrt{(2\pi)^32\omega_p}}\sum_s\left(u^{(s)}_{\mathbf p}b^{(s)}_{\mathbf p}e^{-ipx}+v^{(s)}_{\mathbf p}c^{\dag(s)}_{\mathbf p}e^{ipx}\right).
+\end{equation}
+Imposing $\acomm{b_{\mathbf p,r}}{b^\dag_{\mathbf p',r}}=\acomm{c_{\mathbf p,r}}{c^\dag_{\mathbf p',r'}}=\delta(\mathbf p-\mathbf p')\delta_{rr'},$ we obtain
+\begin{equation}
+    \acomm{\psi_\alpha(\mathbf x,t)}{\psi^\dag_\beta(\mathbf y,t)}=\delta(\mathbf x-\mathbf y).
+\end{equation}
+
+\subsubsection{Free Dirac Theory}
+
+The canonical momentum is 
+\begin{equation}
+    \Pi_\alpha=\pde{\mathcal L}{(\partial_0\psi_\alpha)}=i\overline\psi\gamma^0=i\psi^\dag\implies\acomm{\psi_\alpha(\mathbf x,t)}{i\psi^\dag_\beta(\mathbf y,t)}=i\delta(\mathbf x-\mathbf y).
+\end{equation}
+The Hamiltonian is 
+\begin{equation}
+    H=\int\dd^3p\,\omega_p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}-c_{\mathbf p,r}c^\dag_{\mathbf p,r}\right)
+\end{equation}
+The conserved current and charge are 
+\begin{equation}
+    J^\mu=\overline\psi\gamma^\mu\psi\implies Q=\int\dd^3p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}-c^\dag_{\mathbf p,r}c_{\mathbf p,r}\right)+\delta(0).
+\end{equation}
+We interpret $b^\dag$ as a particle of charge $1$, $c^\dag$ as a particle of charge $-1$, and $\delta(0)$ the charge of vacuum. 
+
+\subsection{Discrete Symmetries}
+
+\begin{enumerate}[label=(\alph*)]
+    \item The parity operator $\gamma^0$, when acted on $\psi$, switches $\psi_L$ with $\psi_R$. Fields and states have internal parity, $\pm 1$ or $\pm i$. 
+    \item The charge conjugation operator switches $b_{\mathbf p,r}$ with $c_{\mathbf p,r}$ and vice versa. Since we defined $C$ to conjugate as well, we need $C\psi\to A\psi^*$, meaning we need the $v$ spinor out of $u^*$, giving us
+    \begin{equation}
+        Au^*=v\implies A=\begin{pmatrix}&\epsilon\\-\epsilon\end{pmatrix}=i\gamma^2\implies C:\psi\to-i\gamma^2\psi^*.
+    \end{equation}
+\end{enumerate}
+
+We have that the Dirac theory has CP symmetry; this is generalized to all Gauge interactions, only broken by the Higgs interaction.
+
+\pagebreak
+
 \section{Interacting Fields}
 \subsection{Formulation}
 \textcolor{red}{Lec 8,9}
@@ -497,247 +809,6 @@ The one-loop integral for $\phi^3$ theory is
     &=\frac{i\lambda^2}{16\pi^2}\int^1_0\dd x\left(\log\left(\frac{\Lambda^2}{a}\right)-1\right).
 \end{align*}
 
-
-\pagebreak
-
-\section{Spin 1/2 Field Theory}
-
-\subsection{Groups}
-
-The \textbf{Poincare group} $P=\{(\Lambda,a)\}$ with multiplication $(\Lambda_1,a_1)\cdot (\Lambda_2,a_2)=(\Lambda_1\Lambda_2,\Lambda_1a_2+a_1)$ is the group of isometry transformations (Lorentz + translations, $x'=\Lambda x+a$) of the Minkowski spacetime. 
-
-The basic subgroups include homogeneous Lorentz group $L=\{(\Lambda,0)\}$ and translations $T_4=\{(\mathbbm 1,a)\}$.
-
-The \textbf{Lorentz Group} $\{\Lambda\}$ is a matrix group defined $\Lambda^\intercal g\Lambda=g$, where $g$ is the Minkowski $+,-,-,-$ metric. The generators can be written 
-$$\Lambda^\intercal g\Lambda=(\mathbbm 1-\omega^\intercal)g(\mathbbm 1-\omega)=g\implies\omega g=-g\omega^\intercal,\quad \omega^{\mu\nu}=-\omega^{\nu\mu}.$$
-From antisymmetry, there are 6 real parameters over $\mu\nu$. Per convention, the generators $\omega$ are typically written 
-$$-\omega=\frac i2\omega^{\mu\nu}S_{\mu\nu},$$
-where $S_{\mu\nu}$ are fixed matrices. Its lie algebra is 
-$$\comm{S_{\mu\nu}}{S_{\omega\rho}}=-i(g_{\mu\omega}S_{\nu\rho}+g_{\nu\rho}S_{\mu\omega}-g_{\mu\rho}S_{\nu\omega}-g_{\nu\omega}S_{\mu\rho}).$$
-
-For intuition, the fundamental/vector (1/2,1/2) representation of $S_{\mu\nu}$ is
-$$(S_{\mu\nu})^{\lambda\rho}=i(\delta^\lambda_\mu\delta^\rho_\nu-\delta^\lambda_\nu\delta^\rho_\mu).$$
-If we define 
-\begin{itemize}
-    \item $S^{0i}=-S^{i0}=K^i$ generator of boost, $\omega^{i0}=-\omega^{0i}$ rapidity;
-    \item $S^{ik}=\epsilon^{ikl}J^l$ generator of rotation, $\omega^{ik}=\epsilon^{ikl}\omega^l$ rotation angle,
-\end{itemize}
-then 
-$$\comm{J^i}{J^k}=i\epsilon^{ikl}J_l,\quad\comm{J^i}{K^i}=i\epsilon^{ikl}K_l,\quad\comm{K^i}{K^l}=i\epsilon^{ikl}J_l.$$
-Note that $\{K\}$ isn't a subgroup.
-
-Lastly, because representation preserves structure, we can simply take the matrix exponential to get the finite transformations:
-$$\Lambda=\exp\left(\frac i2\omega^{\mu\nu}S_{\mu\nu}\right)=\exp\left(i(\omega\cdot\mathbf J+\omega u\cdot\mathbf K)\right).$$
-
-\subsection{Representations}
-First, we introudce fields and states:
-\begin{itemize}
-    \item \textbf{Fields} are operators on Hilbert space. They are finite dimensional representations of the Lorentz group and transform per the Poincare group. We write
-    $$U(\Lambda,a)\circ\phi_\alpha(x)\circ U^{-1}(\Lambda,a)=D_{\alpha\beta}\phi_\beta(\Lambda x+a).$$
-    $D_{\alpha\beta}$ is the Lorentz transformation matrix, which isn't necessarily unitary.
-    \item \textbf{States} are vectors in Hilbert space. They are representations of the Poincare group and transform per the Lorentz group (states don't necessarily depend on the position.) Therefore, we simply write 
-    $$\Lambda:\ket k\to U(\Lambda)\ket k.$$
-\end{itemize}
-
-\subsubsection{Representations of the Poincare Group}
-
-We use Wigner's classification on irreducible representations of the Poincare group. Given a state's momentum, we can find orbit $\hat p$ for which there exists $L(p)$ such that $L(p)\ket{\hat p}=\ket p$. The little group denotes the isometry group of $\hat p$ (formally defined $\{\Lambda\}$ such that $\Lambda\hat p=\hat p$.)
-
-\begin{center}
-\begin{tabular}{ |c|c|c| } 
-\hline
- Orbit/characteristic momentum & $\hat{p}$ & Little group $H\hat{p}$ \\ 
- \hline
- $p^2=m^2,\,p^2>0$ & $(m,0)$ & SO(3) $\sim$ SU(2) \\ 
- \hline
- $p^2=0,\,p^0>0$ & $(1,\hat{e}_3)$ & $E_2$ \\ 
- \hline
- $p=0$ & $(0,0)$ & $L^\uparrow_+\sim\text{SL}(2,\mathbb C)$\\
- \hline
- $p^2=-m^2$ & $(0,m\hat e_3)$ & SU(1,1)\\
- \hline
-\end{tabular}
-\end{center}
-
-Now, we define the representation of $H\hat p$ as 
-$$U(\Lambda)\ket{\hat p,\alpha}=D_{\alpha\alpha'}(\Lambda)\ket{\hat p,\alpha'},\quad\Lambda\in H\hat p.$$
-
-Given the representation of $H\hat p$, we can find the representation of the general $\Lambda\notin H\hat p$ as well. Given $\ket{p,\alpha}\equiv U(L(p))\ket{\hat p,\alpha}$,
-\begin{align*}
-    U(\Lambda)\ket{p,\alpha}&=\left[U(L(\Lambda p))U(L^{-1}(\Lambda p))\right]U(\Lambda)U(L(p))\ket{\hat p,\alpha}\\
-    &=U(L(\Lambda p))\left[U(L^{-1}(\Lambda p))U(\Lambda)U(L(p))\right]\ket{\hat p,\alpha}\\
-    &=U(L(\Lambda p))D_{\alpha\alpha'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\hat p,\alpha}\\
-    &=D_{\alpha\alpha'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,\alpha'}.
-\end{align*}
-We have used the fact that $U(L^{-1}(\Lambda p))U(\Lambda)U(L(p))$ is a representation of the little group and $D_{\alpha\alpha'}$ is a matrix.
-
-\paragraph{Case 1 - $\hat p=(m,0),\,H\hat p=\text{SO}(3)\sim\text{SU}(2)$}
-
-The SU(2) group can be represented by the particle's $J^2$ and $J_3$ values. We let $\ket{\hat p,\alpha}\to\ket{\hat p,j\sigma}$, where $j$ is total spin and $\sigma$ is the third component. The D matrix is written 
-$$U(\Lambda)\ket{p,j\sigma}=D^j_{\sigma\sigma'}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,j\sigma'}.$$
-
-For moving particles, $\comm{J^i}{p^k}=i\epsilon^{ikl}p^l\ne 0$, which necessitates the helicity, defined 
-$$\Sigma=\frac{\mathbf J\cdot\mathbf p}{\abs{\mathbf p}}\implies\comm{p^i}{\Sigma}=\comm{p^i}{J^k}\frac{p^k}{\abs{\mathbf p}}=0.$$
-
-Therefore, for moving particles, we write $\ket{p,j\sigma}\to\ket{p,j\lambda}$ with $\Sigma\ket{p,j\lambda}=\lambda\ket{p,j\lambda}.$
-
-\paragraph{Case 2 - $\hat p=(1,\hat e_3),\,H\hat p=E_2$} The $E_2$ group can be written 
-$$\Lambda\hat p=\hat p\implies\omega\hat p=0,\quad\begin{pmatrix}0&u^1&u^2&u^3\\-u^1&0&\omega^{12}&\omega^{13}\\-u^2&-\omega^{12}&0&\omega^{23}\\-u^3&-\omega^{13}&-\omega^{23}&0\end{pmatrix}\begin{pmatrix}1\\0\\0\\1\end{pmatrix}=\begin{pmatrix}u_3\\-u_1+\omega^{13}\\-u_2+\omega^{23}\\-u_3\end{pmatrix}.$$
-Therefore there are only three generators, $J_3,J_1+K_2,J_2-K_1$. If we let $H^1=J^1+K^2,H^2=J^2-K^1$, the algebra becomes $\comm{J^3}{H^{1,2}}=\pm iH^{2,1}$ and $\comm{H^1}{H^2}=0$, showing $E_2$ is a semidirect product of SO(2) and $T_2$: $E_2=\text{SO}(2)\rtimes T_2$
-
-To find the irreducible representations of $E_2$, we use Wigner's classification again. For $\mathbf H=\begin{pmatrix}H^1\\H^2\end{pmatrix}$ with $\mathbf H\ket{\Pi,\alpha}=\Pi\ket{\Pi,\alpha}$, 
-\begin{center}
-\begin{tabular}{|c|c|c|}
-     \hline
-     Orbit & $\hat\Pi$ & $H\hat\Pi$\\
-     \hline
-     $\Pi^2=c^2$ & $(1,0)$ & $e$; anything\\
-     \hline
-     $\Pi^2=0$ & $(0,0)$ & SO(2)\\
-     \hline
-\end{tabular}
-\end{center}
-
-$\hat\Pi=(1,0)$ corresponds to continuous spin states, which we will neglect here. 
-
-For $\hat\Pi=(0,0)$, the little group is SO(2), which has a one-dimensional representation $D(R(\omega))=e^{i\omega\lambda}$ with $\lambda=0,\pm\frac 12,\pm 1,\pm\frac 32,\cdots$.
-
-Therefore, for massless particles, we write $\ket{p,\alpha}\to\ket{p,\lambda}$ with 
-$$U(\Lambda)\ket{p,\lambda}=e^{i\lambda\omega}(L^{-1}(\Lambda p)\Lambda L(p))\ket{\Lambda p,\lambda}.$$
-
-$\lambda$ is called the helicity. Note that $\gamma$ doesn't have spin.
-
-\paragraph{Case 3 - $\hat p=(0,0)$, $H\hat p=L^\uparrow_+$}
-
-This case corresponds to the vacuum states. For simplicity, we choose the trivial representation $\ket 0$.
-
-\subsubsection{Weyl Spinor Representation of $\mathrm{SL}(n,\mathbbm C)\sim L^\uparrow_+$}
-
-Consider the Pauli matrices,
-$$\sigma^1=\begin{pmatrix}&1\\1&\end{pmatrix},\quad\sigma^2=\begin{pmatrix}&-i\\i&\end{pmatrix},\quad\sigma^3=\begin{pmatrix}1&\\&-1\end{pmatrix}.$$
-We define the 4-pauli vectors as 
-$$\sigma^\mu=(\mathbbm 1,\boldsymbol\sigma)\implies\sigma_\mu=(\mathbbm 1,-\boldsymbol\sigma),\quad\overline\sigma^\mu=(\mathbbm 1,-\boldsymbol\sigma).$$
-If we consider the 2x2 matrices $[x]=x^\mu\sigma_\mu$, for $A\in\mathrm{SL}(2,\mathbb C)$, we have that $[x]_A=A[x]A^\dag$ is a Lorentz transformation; 
-$$\det[x]=x^2,\quad x^2_A=\det[x]_A=\det(A[x]A^\dag)=x^2.$$
-From this, we can find four different representations for $L^\uparrow_+$:
-\begin{itemize}
-    \item Trivial representation; $\psi_\alpha\to A\indices{_\alpha^\beta}\psi_\beta\sim A\psi$
-    \item Conjugate representation; $\psi_{\dot\alpha}\to(A^*)\indices{_{\dot\alpha}^{\dot\beta}}\psi_{\dot\beta}\sim \psi A^\dag$
-    \item Transpose representation $\psi^\alpha\to ({A^\intercal}^{-1})\indices{^\alpha_\beta}\psi^\beta\sim\psi A^{-1}$
-    \item Hermite representation $\psi^{\dot\alpha}\to\bar A\indices{^{\dot\alpha}_{\dot\beta}}\psi^{\dot\beta}\sim\bar A\psi$. We define $\bar A=(A^\dag)^{-1}$.
-\end{itemize}
-Note that, because $L^\uparrow_+$ has $\det=1$, $A^{-1}=A^\intercal$ and therefore we only have lower indices. If we had a unitary representation, $\bar A=A$, and would've only undotted indices.
-
-Further, note that we use the levi-civita symbol to lower and raise indices:
-$$\epsilon^{\alpha\beta}=\epsilon_{\alpha\beta}=\epsilon^{\dot\alpha\dot\beta}=\epsilon_{\dot\alpha\dot\beta}=\begin{pmatrix}&1\\-1&\end{pmatrix}.$$
-
-From the condition that $\det A=1$, the generators must be such that $\Tr \omega=0\implies\omega=\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma$. Then, 
-$$A=\exp\left(\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma)\right),\quad\bar A=\exp\left(\frac i2\left(\boldsymbol\alpha-i\boldsymbol\beta\right)\cdot\boldsymbol\sigma\right).$$
-Therefore, the general representation of $\mathrm{SL}(2,\mathbb C)\sim L^\uparrow_+$ is 
-$$D^{m,n}=\varphi\indices{_{\alpha_1\cdots\alpha_m}^{\dot\beta_1\cdots\dot\beta_n}}=\exp\left(\frac i2(\boldsymbol\alpha+i\boldsymbol\beta)\cdot\boldsymbol\sigma\right)\exp\left(\frac i2\left(\boldsymbol\alpha-i\boldsymbol\beta\right)\cdot\boldsymbol\sigma\right).$$
-
-Another way to derive is to start by rewriting $\mathbf M=\frac 12(\mathbf J+i\mathbf K),\quad\mathbf N=\frac 12(\mathbf J-i\mathbf K)$. By writing this, $\mathbf M$ and $\mathbf N$ commute with each other and have their own $\mathfrak{su}(2)$ algebra. Therefore, 
-$$\Lambda=e^{i(\mathbf\omega\cdot\mathbf J+\mathbf v\cdot\mathbf k)}=e^{i\mathbf M\cdot(\mathbf w-i\mathbf v)}e^{i\mathbf N\cdot(\mathbf w+i\mathbf v)}.$$
-
-We now consider the (1/2,0) representation. We have 
-$$\mathbf M=\frac{\sigma}2,\quad\mathbf N=0\implies\mathbf J=\frac{\sigma}2,\quad\mathbf K=-\frac{i\sigma}2.$$
-The objects transform under this representation are called left-handed spinors $\psi_L$. These transform
-$$(\psi_L)_\alpha\to A\indices{_\alpha^\beta}\psi_\beta,\quad A\indices{_\alpha^\beta}=\exp\left(i\frac{w\cdot\sigma}{2}+\frac{u\cdot\sigma}2\right).$$
-
-Similarly, the (0,1/2) representation has
-$$M=\frac{\sigma}2,\quad N=0\implies J=\frac{\sigma}2,\quad K=\frac{i\sigma}2.$$
-The objects that transform under this representation are called right-handed spinors $\psi_R$. These transform
-$$(\psi_R)^{\dot\beta}\to\bar A\indices{^{\dot\alpha}_{\dot\beta}}(\psi_R)^{\dot\beta},\quad\bar A\indices{^{\dot\alpha}_{\dot\beta}}=\exp\left(i\frac{w\cdot\sigma}2-\frac{u\cdot\sigma}2\right).$$
-
-Lastly, the (1/2,1/2) representation can be written 
-$$(\psi_L)^\alpha(\sigma^\mu)_{\alpha\dot\beta}(\psi_R)^{\dot\beta}.$$
-This is an ordinary 4-vector; recall that $x^\mu\sim [x]\to A[x]A^\dag$.
-
-\subsubsection{Dirac Spinor Representation}
-
-For theories with parity symmetry, Dirac spinors are used to include both Left-handed spinors as well as Right-handed spinors. We let $\psi=\begin{pmatrix}\chi_\alpha\\\bar\psi^{\dot\alpha}\end{pmatrix}$. The Lorentz transformation is 
-\begin{align*}
-    D(\Lambda)&=\begin{pmatrix}\exp\left(\frac i2\boldsymbol\sigma(\boldsymbol\omega-i\mathbf u)\right)&0\\0&\exp\left(\frac i2\boldsymbol\sigma(\boldsymbol\omega+i\mathbf u)\right)\end{pmatrix}\\
-    &=\exp\left(i\boldsymbol\omega\cdot\boldsymbol\Sigma+\frac 12\mathbf u\cdot\boldsymbol\alpha\right),\quad\boldsymbol\Sigma=\frac 12\begin{pmatrix}\boldsymbol\sigma&0\\0&\boldsymbol\sigma\end{pmatrix},\quad\boldsymbol\alpha=\begin{pmatrix}-\boldsymbol\sigma&0\\0&\boldsymbol\sigma\end{pmatrix}.
-\end{align*}
-$\boldsymbol\Sigma$ is a representation of $\mathbf J$, and $\boldsymbol\alpha$ is a representation of $\mathbf K$. The generator algebra is such that
-$$\Sigma^i\Sigma^k=\alpha^i\alpha^k=\delta^{ik}+i\epsilon^{ikl}\Sigma^l,\quad\comm{\Sigma^i}{\gamma^0}=\comm{\alpha^i}{\gamma^0}=0.$$
-
-where
-$$\gamma^0=\begin{pmatrix}0&\mathbbm 1\\\mathbbm 1&0\end{pmatrix},\quad\gamma^i=\begin{pmatrix}0&\sigma^i\\-\sigma^i&0\end{pmatrix}.$$
-These are known as the Dirac gamma matrices. These have an algebra,
-$$\acomm{\gamma^\mu}{\gamma^\nu}=2g^{\mu\nu}\times\mathbbm 1.$$
-
-\subsection{Formalism}
-We want a Lagrangian that:
-\begin{itemize}
-    \item Is Lorentz invariant,
-    \item Has at most 2 derivatives and 2 fields,
-    \item Has a real action,
-    \item Has a U(1) symmetry ($\chi\to e^{i\alpha}\chi$). Experimentally, every 1/2 has a conserved charge, for example, leptop/baryon number, electric charge.
-\end{itemize}
-
-The kind of left-handed objects we can have are 
-$$\chi_\alpha,\quad\chi^*_{\dot\alpha},\quad\partial^\mu,\quad\sigma^\mu_{\alpha\dot\alpha},\quad\bar\sigma^{\mu\dot\alpha\alpha},\quad\epsilon_{\alpha\beta}.$$
-
-For a bilinear $\mathcal L$, there are three possibilities:
-\begin{enumerate}
-    \item $\mathcal L=c\chi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\dot\beta}(\partial_\mu\chi_\beta)$. Taking the complex conjugate then integrating by parts, realness requires that $c^*$ is purely imaginary; from convention, we choose $c=i$.
-    \item $\mathcal L=\chi_\alpha\epsilon^{\alpha\beta}\chi_\beta$. This is not U(1) invariant. This corresponds to the Majonara mass, for neutrinos without charge.
-    \item $(\partial_\mu\chi_\alpha)\epsilon^{\alpha\beta}(\partial^\mu\chi_\beta)$. This is not U(1) invariant either.
-\end{enumerate}
-Therefore, we write the action
-\begin{equation}
-    S=\int\dd^4x\,i\chi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\alpha}(\partial_\mu\chi_\alpha)=\int\dd^4x\,i\bar\chi\slashed\partial\chi,\quad\slashed\partial\equiv\bar\sigma^\mu\partial_\mu.
-\end{equation}
-
-From the Euler-Lagrange equation, we obtain
-\begin{equation}
-    \bar\sigma^{\mu\dot\alpha\beta}\partial_\mu\chi_\beta=0,
-\end{equation}
-known as the (left-handed) Weyl equation.
-
-This is consistent with the massless Klein-Gordon equation. 
-
-The plain wave solution is 
-\begin{align*}
-    \chi_L&=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a_{p_-}\begin{pmatrix}0\\1\end{pmatrix}e^{-ipx}+b^\dag_{p_+}\begin{pmatrix}1\\0\end{pmatrix}e^{ipx}\right]\\
-    \chi_L^\dag&=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a^\dag_{p_-}\begin{pmatrix}0\\1\end{pmatrix}e^{ipx}+b_{p_+}\begin{pmatrix}1\\0\end{pmatrix}e^{-ipx}\right].
-\end{align*}
-
-Similarly, the right-handed Lagrangian and the corresponding equation are
-$$\mathcal L=\pm i\psi^{*\alpha}\sigma^\mu_{\alpha\dot\beta}(\partial_\mu\psi^{\dot\beta})\implies\sigma^\mu_{\alpha\dot\beta}\partial_\mu\psi^{\dot\beta}=0.$$
-The plain wave solution is
-$$\psi_R=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\left[a_{p-}\begin{pmatrix}1\\0\end{pmatrix}e^{-ipx}+b^\dag_{p_+}\begin{pmatrix}0\\1\end{pmatrix}e^{ipx}\right].$$
-
-
-\subsubsection{Majorana Theory}
-To add mass to our theory, we consider the Majorana mass term. The corresponding action is 
-$$S=\int\dd^4x\left[i\psi^*_{\dot\alpha}\bar\sigma^{\mu\dot\alpha\alpha}\partial_\mu\psi_\alpha-\frac m2\psi_\alpha\epsilon^{\alpha\beta}\psi_\beta+\text{h.c.}\right].$$
-The equations of motion are
-$$i\bar\sigma^{\mu\dot\alpha\beta}\partial_\mu\psi_\beta=m(\psi^*)^{\dot\alpha},\quad -i\partial_\mu\psi^*_{\dot\alpha}\bar\sigma^{\mu\alpha\beta}=m\psi^\beta.$$
-With the ansatz $\psi_\beta=x_\beta e^{-ipx}+y_\beta e^{ipx}$, we can reduce the equations to 
-$$(p\cdot\bar\sigma)x=my^\dag,\quad (p\cdot\bar\sigma)y=-mx^\dag,\iff(p\cdot\sigma)y^\dag=mx,\quad(p\cdot\sigma)x^\dag=-my.$$
-The solutions are such that 
-$$x_\alpha(p,s)=\sqrt{p\cdot\sigma}\chi_s,\quad y_\alpha(p,s)=(2s)\sqrt{p\cdot\sigma}\chi_s,$$
-giving us 
-$$\psi_\alpha(x)=\int\frac{\dd^3p}{\sqrt{(2\pi)^32\omega_p}}\sum_s\left(x_\alpha(p,s)a_{p,s}e^{-ipx}+y_\alpha(p,s)a^\dag_{p,s}e^{ipx}\right).$$
-
-\subsection{Dirac Theory}
-
-\subsubsection{Gamma Matrices}
-
-We define the Dirac gamma matrices (in \textbf{Weyl/Chiral basis}):
-
-$$\gamma=\begin{pmatrix}0&\sigma^\mu\\\overline\sigma^\mu&0\end{pmatrix}$$
-
-The gamma matrices have a Clifford algebra:
-$$\acomm{\gamma^\mu}{\gamma^\nu}=2g^{\mu\nu}\mathbbm 1.$$
-
-\subsubsection{Dirac Formalism}
-
-To add mass to the theory while keeping U(1) symmetry, we consider a Lagrangian of the form 
-$$\mathcal L=i(\psi^\dag_L)_{\dot\alpha}\overline\sigma^{\mu\alpha\dot\beta}\psi_{L\beta}+(\psi^\dag_R)^\alpha\sigma^\mu_{\dot\alpha\beta}\partial_\mu\psi^{\dot\beta}_R-m(\psi^\dag_R)^\alpha(\psi_{L\beta})+\text{h.c.}.$$
 
 \pagebreak
 

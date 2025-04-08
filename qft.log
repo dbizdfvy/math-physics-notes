@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.4)  25 MAR 2025 23:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.4)  7 APR 2025 20:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -534,41 +534,41 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for U+bbm on input line 81.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [3] [4] [5{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [6]
-<images/qft-images/stuchannels.jpg, id=47, 3433.82875pt x 1003.75pt>
-File: images/qft-images/stuchannels.jpg Graphic file (type jpg)
-<use images/qft-images/stuchannels.jpg>
-Package pdftex.def Info: images/qft-images/stuchannels.jpg  used on input line 303.
-(pdftex.def)             Requested size: 514.9221pt x 150.51006pt.
- [7 <./images/qft-images/stuchannels.jpg>] [8]
-<images/qft-images/yukawastuchannels.jpg, id=56, 1003.75pt x 1020.81375pt>
-File: images/qft-images/yukawastuchannels.jpg Graphic file (type jpg)
-<use images/qft-images/yukawastuchannels.jpg>
-Package pdftex.def Info: images/qft-images/yukawastuchannels.jpg  used on input line 385.
-(pdftex.def)             Requested size: 271.0125pt x 275.6234pt.
- [9 <./images/qft-images/yukawastuchannels.jpg>] [10] [11] [12]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 639.
+) [3] [4] [5{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 311.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [13] [14] [15] [16] [17] (./qft.aux)
+) [6] [7] [8] [9] [10] [11]
+<images/qft-images/stuchannels.jpg, id=66, 3433.82875pt x 1003.75pt>
+File: images/qft-images/stuchannels.jpg Graphic file (type jpg)
+<use images/qft-images/stuchannels.jpg>
+Package pdftex.def Info: images/qft-images/stuchannels.jpg  used on input line 615.
+(pdftex.def)             Requested size: 514.9221pt x 150.51006pt.
+ [12 <./images/qft-images/stuchannels.jpg>] [13]
+<images/qft-images/yukawastuchannels.jpg, id=75, 1003.75pt x 1020.81375pt>
+File: images/qft-images/yukawastuchannels.jpg Graphic file (type jpg)
+<use images/qft-images/yukawastuchannels.jpg>
+Package pdftex.def Info: images/qft-images/yukawastuchannels.jpg  used on input line 697.
+(pdftex.def)             Requested size: 271.0125pt x 275.6234pt.
+ [14 <./images/qft-images/yukawastuchannels.jpg>] [15] [16] [17] [18] (./qft.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 17019 strings out of 474116
- 334431 string characters out of 5743682
+ 17023 strings out of 474116
+ 334486 string characters out of 5743682
  1981187 words of memory out of 5000000
- 39031 multiletter control sequences out of 15000+600000
- 573072 words of font info for 94 fonts, out of 8000000 for 9000
+ 39035 multiletter control sequences out of 15000+600000
+ 573544 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,20n,121p,685b,725s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/yehyun/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on qft.pdf (17 pages, 1192243 bytes).
+Output written on qft.pdf (18 pages, 1198338 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
+ 210 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 
