@@ -3,14 +3,15 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{yehyun}
 \usepackage{bm}
+\usepackage{feynman}
 
 \title{Notes on Quantum Field Theory}
 \author{Yehyun Choi}
 \date{August 2024}
 
 \begin{document}
-
 \maketitle
+\tableofcontents
 \pagebreak
 
 
@@ -431,9 +432,11 @@ The equation of motion is
 \end{equation}
 Letting $\psi=\begin{pmatrix}x_\alpha\\y^{\dag\dot\beta}\end{pmatrix}e^{-ipx}$, we obtain, from the two-component spinor results, 
 \begin{equation}
-    \psi=u_{\mathbf p,s}e^{-ipx}+v_{\overline p,x}e^{ipx},\quad u_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_s\\\sqrt{p\cdot\sigma}\chi_s\end{pmatrix},\quad v_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_{-s}\\-\sqrt{p\cdot\sigma}\chi_{-s}\end{pmatrix}.
+    \psi=u_{\mathbf p,s}e^{-ipx}+v_{\mathbf p,x}e^{ipx},\quad u_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_s\\\sqrt{p\cdot\overline\sigma}\chi_s\end{pmatrix},\quad v_{\mathbf p,s}=\begin{pmatrix}\sqrt{p\cdot\sigma}\chi_{-s}\\-\sqrt{p\cdot\overline\sigma}\chi_{-s}\end{pmatrix}.
 \end{equation}
-By definition, $(\slashed p-m)u=(\slashed p+m)v=0$. It holds that $u^\dag u=2E_p$ and $\overline uu=2m$.
+By definition, $(\slashed p-m)u=(\slashed p+m)v=0$. The normalization is such that $u^\dag u=v^\dag v=2E_p$ and $\overline uu=-\overline vv=2m$. 
+
+The $u$ and $v$ are orthogonal to each other ($\overline uv=\overline vu=0$). While $u^\dag v,v^\dag u\ne 0$, it holds $u^\dag(\mathbf p)v^\dag(-\mathbf p)=v^\dag(-\mathbf p)u(\mathbf p)=0$.
 
 Furthermore, 
 \begin{equation}
@@ -458,11 +461,11 @@ The canonical momentum is
 \end{equation}
 The Hamiltonian is 
 \begin{equation}
-    H=\int\dd^3p\,\omega_p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}-c_{\mathbf p,r}c^\dag_{\mathbf p,r}\right)
+    H=\int\dd^3p\,\omega_p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}+c^\dag_{\mathbf p,r}c_{\mathbf p,r}\right)
 \end{equation}
 The conserved current and charge are 
 \begin{equation}
-    J^\mu=\overline\psi\gamma^\mu\psi\implies Q=\int\dd^3p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}-c^\dag_{\mathbf p,r}c_{\mathbf p,r}\right)+\delta(0).
+    J^\mu=\overline\psi\gamma^\mu\psi\implies Q=\int\dd^3p\sum_r\left(b^\dag_{\mathbf p,r}b_{\mathbf p,r}-c^\dag_{\mathbf p,r}c_{\mathbf p,r}\right).
 \end{equation}
 We interpret $b^\dag$ as a particle of charge $1$, $c^\dag$ as a particle of charge $-1$, and $\delta(0)$ the charge of vacuum. 
 
@@ -482,6 +485,7 @@ We have that the Dirac theory has CP symmetry; this is generalized to all Gauge 
 
 \section{Interacting Fields}
 \subsection{Formulation}
+\subsubsection{Dyson's Formula}
 \textcolor{red}{Lec 8,9}
 
 For a system with an interaction, term, the Hamiltonian can be written $H=H_0+H_\text{int}$. We define the interaction action field to be 
@@ -498,10 +502,12 @@ we can see that $H_I(t)$ is the interaction Hamiltonian written in the interacti
 Note that the successive integration limits get smaller and the interaction Hamiltonians are time-ordered. To get rid of the time-ordering operators, we note that 
 $$\int^t_{t_0}\dd t_1\int^{t_1}_{t_0}\dd t_2\cdots\int^{t_{n-1}}_{t_0}\dd t_n\,H_I(t_1)\cdots H_I(t_n)=\frac 1{n!}\int^t_{t_0}\dd t_1\cdots\dd t_n T\left[H_I(t_1)\cdots H_I(t_n)\right].$$
 Refer to Peskin 4.21 for a ``proof''\footnote{\url{http://scipp.ucsc.edu/~haber/ph215/TimeOrderedExp.pdf}} - it is analogous to finding the volume of an $n$-simplex. With this, we can write $U(t,t_0)$ in a compact form:
-\begin{align*}
-    U(t,t_0)&=1+(-i)\int^t_{t_0}\dd t_1\,H_I(t_1)+\frac{(-i)^2}{2!}\int^t_{t_0}\dd t_1\dd t_2\,T[H_I(t_1)H_I(t_2)]+\cdots\\
-    &=T\exp\left(-i\int^t_{t_0}\dd t'H_I(t')\right)=T\exp\left[i\int^t_{t_0}\int\dd^3x'\mathcal L'(\phi_I(\lambda'))\right]
-\end{align*}
+\begin{align}
+    \begin{split}
+        U(t,t_0)&=1+(-i)\int^t_{t_0}\dd t_1\,H_I(t_1)+\frac{(-i)^2}{2!}\int^t_{t_0}\dd t_1\dd t_2\,T[H_I(t_1)H_I(t_2)]+\cdots\\
+        &=T\exp\left(-i\int^t_{t_0}\dd t'H_I(t')\right)=T\exp\left[i\int^t_{t_0}\int\dd^3x'\mathcal L'(\phi_I(\lambda'))\right]
+    \end{split}
+\end{align}
 Note that 
 \begin{itemize}
     \item In this form, it is evident (from the limits of integrals) that $U(t_1,t_2)U(t_2,t_3)=U(t_1,t_3),$ and $U(t_1,t_3)U^\dag(t_2,t_3)=U(t_1,t_2);$
@@ -519,6 +525,25 @@ where we define $S=\lim_{t,t\to\pm\infty}U(t,t')$, which is also called the $S$ 
     S=T\exp\left[i\int^\infty_{-\infty}\dd^4x\mathcal L(\Phi_I)\right].
 \end{equation}
 This is known as Dyson's equation. 
+
+\subsubsection{Correlation Function}
+
+The evolution of $\ket 0$ with $H$, in terms of the eigenvalues of $H$ is 
+$$e^{-iHT}\ket 0=e^{-iE_0T}\ket\Omega\braket{\Omega}{0}+\sum_{n\ne 0}e^{-iE_nT}\ket n\braket{n}{0}\implies\ket\Omega=\lim_{T\to\infty(1-i\epsilon)}\left(e^{-iE_0T}\braket{\Omega}{0}\right)^{-1}e^{-iHT}\ket 0,$$
+where we have used the fact that $E_0$ is dies slowest for a slightly imaginary time which turns into real exponential factor. 
+
+Shifting $T$ by $t_0$ and inserting an exponential factor of $H_0$ (since $H_0\ket 0=\ket 0$), 
+$$\ket 0=\lim_{T\to\infty(1-i\epsilon)}\left(e^{-iE_0(t_0-(-T))}\braket{\Omega}{0}\right)^{-1}U(t_0,-T)\ket 0.$$
+Assuming $x^0>y^0$, 
+$$\frac{\bra\Omega\phi(x)\phi(y)\ket\Omega}{\braket{\Omega}{\Omega}}=\lim_{T\to\infty(1-i\epsilon)}\frac{\bra 0U(T,x^0)\phi_I(x)U(x^0,y^0)\phi_I(y)U(y^0,-T)\ket 0}{\bra 0U(T,-T)\ket 0},$$
+where we have canceled out a factor of $\left(\abs{\braket{0}{\Omega}^2e^{-iE_0(2T)}}\right)^{-1}$ from both sides.
+
+Hence, the correlation function is written 
+\begin{equation}
+    \bra\Omega T\{\phi(x)\phi(y)\}\ket\Omega=\lim_{T\to\infty(1-i\epsilon)}\frac{\bra 0T\left\{\phi_I(x)\phi_I(y)\exp\left[-i\int^T_{-T}\dd t H_I(t)\right]\right\}\ket 0}{\bra 0T\left\{\exp\left[-i\int^T_{-T}\dd tH_I(t)\right]\right\}\ket 0}
+\end{equation}
+
+\subsubsection{Wick's Theorem}
 
 Recall that $\Phi_I$ are fields that can be expressed in ladder operators, which are easier to work with in normal ordering. For this, we introduce \textbf{Wick's theorem}, a theorem that relates time ordering $T$ to normal ordering $::$. First, we define the \textbf{contraction}, defined 
 $$T(\phi^a(x)\phi^b(y))=:\phi^a(x)\phi^b(y):+\wick{\c1\phi^a(x)\c1\phi^b(y)}.$$
@@ -561,7 +586,8 @@ Keeping in mind that all contractions are complex numbers, we can deduce that th
 $$(\phi^+_1+\phi^-_1)\wick{\c1\phi_2\c1\phi_3}\normord{\phi_4\cdots\phi_n}+\cdots=\wick{\c1\phi_2\c1\phi_3}\normord{\phi_1\phi_4\cdots\phi_n}+\wick{\c1\phi_2\c1\phi_3}\sum^n_{i=4}\phi_4\cdots\phi_{i-1}\wick{\c1\phi_1\c1\phi_i}\phi_{i+1}\cdots\phi_n+\cdots.$$
 In other words, multiplying a normal ordered sequence by $\phi_1$ is the normal ordering sequence with $\phi_1$ and all single contractions with $\phi_1$. Hence Wick's theorem is proved.
 
-\subsubsection{Interaction with External Field}
+
+\example{Interaction with External Field}
 \textcolor{red}{Lec 9, 10}
 
 Let the interacting Hamiltonian of the external field be $H'=\lambda\phi(x)\rho(x)$. For boundary conditions, we let $\rho(x)\to 0$ for $t\pm\infty$. From Dyson's formula, we have 
@@ -584,41 +610,53 @@ $$E_0=\frac{(-i\lambda)^2}{2T}\int\frac{\dd^4k}{(2\pi)^4}\abs{f(k^0)}^2\abs{\til
 From Parseval's theorem\footnote{\url{https://mathworld.wolfram.com/ParsevalsTheorem.html}}, we have 
 $$E_0=-\frac{\lambda^2}{2}\int\frac{\dd^3k}{(2\pi)^0}\abs{\rho(\mathbf k)}^2\frac 1{k^2+m^2-i\epsilon}=\frac{\lambda^2}2\int\rho(x_1)\rho(x_2)V(\mathbf x_1-\mathbf x_2)\dd^3x_1\dd^3x_2.$$
 From the Fourier transform, we have 
-$$V(\mathbf x)=-\int\frac{\dd^3k}{(2\pi)^3}e^{i\mathbf k\cdot\mathbf x}\frac 1{\mathbf k^2+m^2-i\epsilon}=-\int^\infty_{-\infty}=\frac 1{(2\pi)^2}\frac 1{ir}\frac{k\dd k}{k^2+m^2}e^{ikr}=-\frac 1{4\pi r}e^{-mr}.$$
+$$V(\mathbf x)=-\int\frac{\dd^3k}{(2\pi)^3}e^{i\mathbf k\cdot\mathbf x}\frac 1{\mathbf k^2+m^2-i\epsilon}=-\int^\infty_{-\infty}\frac 1{(2\pi)^2}\frac 1{ir}\frac{k\dd k}{k^2+m^2}e^{ikr}=-\frac 1{4\pi r}e^{-mr}.$$
 
 \subsection{Feynman Diagrams}
 \textcolor{red}{Lec. 11-12}
 
-We are often interested in the (nontrivial) elements of the S-matrix as it relates to the scattering amplitude of a specific process:
-$$\bra fS-\mathbbm 1\ket i=i(2\pi)^4\delta(k_f-k_i)A_{fi},$$
-where $A_{fi}$ is the scattering amplitude; the momentum-conserving delta function follows from the translational invariance of the S-matrix.
-
-Often, we represent scattering process with a Feynman diagram. To find the corresponding element of the S-matrix $\bra fS-\mathbbm 1\ket i$, 
+The Feynman diagrams are a convenient way to express correlation functions. The rules in the position space to find the correlation function $\bra fS\ket i$ are, with all connected, amputated  diagrams, 
 \begin{enumerate}
-    \item Draw all topologically distinct diagrams;
-    \item For each vertex, add $(-i\lambda)\int\dd^4x$;
-    \item For each internal line, add $\wick{\c1\phi(x_i)\c1\phi(x_j)}=\int\frac{\dd^4k}{(2\pi)^4}\frac{e^{-ik(x_i-x_j)}}{k^2-m^2+i\epsilon}$;
-    \item For each incoming external line, add $e^{-ik_\alpha x_i}$; for each outgoing external line, add $e^{ik_\alpha x_i}$;
+    \item For each propagator, add $D_F(x-y)$
+    \item For each vertex, add $(-i\lambda)\int\dd^4z$
+    \item For each incoming external line, add $e^{-ipx}$, for each outgoing external line, add $e^{ipx}$
     \item Divide by the symmetry factor.
 \end{enumerate}
-In momentum space, the Feynman rules are much simpler; to find the scattering amplitude \textcolor{red}{times $i$} $iA_{fi}$, 
+In the momentum space, 
 \begin{enumerate}
-    \item Draw all topologically distinct diagrams;
-    \item For each vertex, add $(-i\lambda)$;
-    \item For each internal line, add $\frac{i}{k^2-m^2+i\epsilon}$;
-    \item For each undetermined/loop momentum, integrate - $\int\frac{\dd^4k}{(2\pi)^4}$;
+    \item For each propagator, add $\tilde D_F=\frac{i}{k^2-m^2+i\epsilon}$
+    \item For each vertex, add $(-i\lambda)$, and conserve momentum
+    \item For each loop, add $\int\frac{\dd^4k}{(2\pi)^4}$;
     \item Divide by the symmetry factor.
 \end{enumerate}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/qft-images/stuchannels.jpg}
-    \caption{Feynman diagrams for the $\lambda^2$ order 2-2 scattering in $\lambda^3\phi^3/3!$ theory, also known as the S, T, and U channel}
-    \label{fig:stuchannels}
+\begin{figure}
+    \resizebox{.95\linewidth}{!}
+    {
+    \begin{feynman}
+        \dashed[showArrow=false]{8.00, 6.00}{9.00, 8.00}
+        \dashed[showArrow=false]{14.00, 5.00}{14.00, 7.00}
+        \dashed[showArrow=false]{14.00, 5.00}{17.00, 4.00}
+        \dashed[showArrow=false]{22.00, 5.00}{25.00, 8.00}
+        \dashed[showArrow=false]{8.00, 6.00}{9.00, 4.00}
+        \dashed[showArrow=false]{5.00, 6.00}{8.00, 6.00}
+        \dashed[showArrow=false]{4.00, 4.00}{5.00, 6.00}
+        \dashed[showArrow=false]{5.00, 6.00}{4.00, 8.00}
+        \dashed[showArrow=false]{22.00, 5.00}{22.00, 7.00}
+        \dashed[showArrow=false]{22.00, 7.00}{25.00, 4.00}
+        \dashed[showArrow=false]{19.00, 4.00}{22.00, 5.00}
+        \dashed[showArrow=false]{11.00, 8.00}{14.00, 7.00}
+        \dashed[showArrow=false]{22.00, 7.00}{19.00, 8.00}
+        \dashed[showArrow=false]{14.00, 7.00}{17.00, 8.00}
+        \dashed[showArrow=false]{11.00, 4.00}{14.00, 5.00}
+    \end{feynman}
+    }
+  \caption{The tree-level diagrams for the $\phi\phi\to\phi\phi$ interaction in $\phi^3$ theory.}
+  \label{3.2-ff-ff}
 \end{figure}
 
-\example Consider the $\lambda^2$ order 2-2 scattering in $\phi^3$ theory with identical particles, as shown in figure \ref{fig:stuchannels}. The total scattering amplitude is 
-$$A_{fi}=(-i\lambda)^2\cdot i\left(\frac{1}{(k_1+k_2)^2-m^2+i\epsilon}+\frac{1}{(k_1-k'_1)^2-m^2+i\epsilon}+\frac 1{(k_1-k'_2)^2-m^2+i\epsilon}\right).$$
+\example Consider the $\lambda^2$ order 2-2 scattering in $\phi^3$ theory with identical particles, as shown in figure \ref{3.2-ff-ff}. The total scattering amplitude is 
+$$i\mathcal M_{\phi\phi\to\phi\phi}=(-i\lambda)^2\cdot i\left(\frac{1}{(k_1+k_2)^2-m^2+i\epsilon}+\frac{1}{(k_1-k'_1)^2-m^2+i\epsilon}+\frac 1{(k_1-k'_2)^2-m^2+i\epsilon}\right).$$
 The scattering amplitude for these processes are often written in terms of the \textbf{Mandelstam variables}. To get an intuition, we consider an elastic collision in the center of mass frame. The momenta can be written 
 $$k_1=(E,0,0,p),\quad k'_1=(E,p\sin\theta,0,p\cos\theta),\quad k_2=(E,0,0,-p),\quad k'_2=(E,-p\sin\theta,0,-p\cos\theta),$$
 where $\theta$ is the scattering angle. We now write the definition of the Mandelstam variables and write them in terms of $E$, $p$, and $\theta$:
@@ -640,7 +678,7 @@ Note that
     \item The scattering amplitude is invariant under $s\leftrightarrow t\leftrightarrow u$. This is called a \textbf{crossing symmetry}. 
 \end{itemize}
 
-\subsection{Physical Quantities}
+\subsection{Scattering}
 \textcolor{red}{Lec. 13-14}
 
 Because the transition amplitude is not $L^2$, it is necessary to work in box normalization, characterized by
@@ -705,6 +743,10 @@ $$D^{(3)}=\frac 1{256\pi^5}\dd E_1\dd E_2\dd\Omega_1\dd\phi_{12}.$$
 \end{align*}
 
 Note that amplitudes should stay the same for $A_{if}=A_{\overline f\overline i}$.
+
+\pagebreak
+
+\section{Formalisms}
 
 \subsection{Unitarity}
 \textcolor{red}{Lec. 16-17}
