@@ -419,6 +419,23 @@ It is known as the Chirality operators, because one can project the Dirac spinor
 \begin{equation}
     P_L=\frac{1-\gamma_5}2=\begin{pmatrix}\mathbbm 1&\\&0\end{pmatrix},\quad P_R=\frac{1+\gamma_5}2=\begin{pmatrix}0&\\&\mathbbm 1\end{pmatrix}.
 \end{equation}
+Contraction identities include
+\begin{align*}
+    \gamma^\mu\gamma_\mu&=4I_4\\
+    \gamma^\mu\gamma^\nu\gamma_\mu&=-2\gamma^\nu\\
+    \gamma^\mu\gamma^\nu\gamma^\rho\gamma_\mu&=4\eta^{\nu\rho}I_4\\
+    \gamma^\mu\gamma^\nu\gamma^\rho\gamma^\sigma\gamma_\mu&=-2\gamma^\sigma\gamma^\rho\gamma^\nu.
+\end{align*}
+Trace identities include 
+\begin{align*}
+    \tr\gamma^\mu&=0\\
+    \tr\gamma^5&=0\\
+    \tr(\text{odd \# of }\gamma^\mu)&=0\\
+    \tr(\gamma^5\text{odd \# of }\gamma^\mu)&=0\\
+    \tr(\gamma^\mu\gamma^\nu)&=4\eta^{\mu\nu}\\
+    \tr(\gamma^\mu\gamma^\nu\gamma^\rho\gamma^\sigma)&=4(\eta^{\mu\nu}\eta^{\rho\sigma}-\eta{\mu\rho}\eta^{\nu\sigma}+\eta^{\mu\sigma}\eta^{\nu\rho})\\
+    \tr(\gamma^\mu\gamma^\nu\gamma^\rho\gamma^\sigma\gamma^5)&=-4i\epsilon^{\mu\nu\rho\sigma}.
+\end{align*}
 
 \subsubsection{Dirac Formalism}
 
@@ -631,27 +648,6 @@ In the momentum space,
 \end{enumerate}
 
 
-The scattering amplitude for these processes are often written in terms of the \textbf{Mandelstam variables}. To get an intuition, we consider an elastic collision in the center of mass frame. The momenta can be written 
-$$k_1=(E,0,0,p),\quad k'_1=(E,p\sin\theta,0,p\cos\theta),\quad k_2=(E,0,0,-p),\quad k'_2=(E,-p\sin\theta,0,-p\cos\theta),$$
-where $\theta$ is the scattering angle. We now write the definition of the Mandelstam variables and write them in terms of $E$, $p$, and $\theta$:
-\begin{align*}
-    s&=(k_1+k_2)^2=4E^2=E_T^2;\\
-    t&=(k_1-k'_1)^2=-4p^2\sin^2\left(\frac\theta 2\right)=-\mathbf q'^2\\
-    u&=(k_1-k'_2)^2=-4p^2\cos^2\left(\frac\theta 2\right)=-\mathbf q_c^2,
-\end{align*}
-where $E_T$ is the total energy, $\mathbf q$ is the momentum transfer from $p_1$ to $p'_1$ and $\mathbf q_c$ is the momentum transfer in the cross channel. In terms of these variables, the scattering amplitude is 
-$$A_{fi}=-i\lambda^2\left(\frac 1{s-m^2}+\frac 1{t-m^2}+\frac 1{u-m^2}\right)=-i\lambda^2\left(\frac 1{E_T^2-m^2}+\frac 1{\mathbf q^2-m^2}+\frac 1{\mathbf q_c^2-m^2}\right).$$
-Note that
-\begin{itemize}
-    \item The s-channel amplitude, while having no direct approximation in Born approximation, simplifies to the perturbation term.
-    \item The t-channel scattering amplitude can be written 
-    $$\frac 1{\mathbf q^2+m^2}=\int\dd^3xe^{i\mathbf q\cdot\mathbf x}\left(\frac{e^{-mr}}{4\pi r}\right);$$
-    in other words, the t-channel amplitude is the Fourier transform (Born-Oppenheimer approximation) of the Yukawa potential;
-    \item The u-channel amplitude is necessary for Bose symmetry;
-    \item s,t,u are not independent; $s+t+u=4m^2=m^2_1+m_2^2+m_3^2+m_4^2$, in general;
-    \item The scattering amplitude is invariant under $s\leftrightarrow t\leftrightarrow u$. This is called a \textbf{crossing symmetry}. 
-\end{itemize}
-
 \subsection{Scattering}
 \textcolor{red}{Lec. 13-14}
 
@@ -704,23 +700,24 @@ $$D^{(3)}=\frac 1{(2\pi)^3}\frac 1{8E_1E_2E_3}k^2_1\dd k_1\dd\Omega_1k^2_2\dd k_
 With $\dd\Omega_{12}=\dd(\cos\theta_{12})\dd\phi_{12}$ and $dd(\cos\theta_{12}\delta(E_1+E_2+E_3-E_T)=\frac{E_3}{k_1k_2}$, we obtain
 $$D^{(3)}=\frac 1{256\pi^5}\dd E_1\dd E_2\dd\Omega_1\dd\phi_{12}.$$
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/qft-images/yukawastuchannels.jpg}
-    \caption{Feynman diagrams for the $\lambda^2$ order 2-2 scattering in $\lambda\psi\overline\psi\phi/3!$ theory. }
-    \label{fig:yukawastuchannels}
-\end{figure}
+\subsubsection{Mandelstam Variables}
 
-\example $2\to 2$ Yukawa scattering. Consider an interaction Lagrangian $\mathcal L=\frac\lambda{3!}\psi^*\psi\phi$. The scattering amplitudes  for $p+p\to p+p$ and $p+\overline p\to p+\overline p$ scattering, as shown in figure \ref{fig:yukawastuchannels} are 
+The scattering amplitudes for an elastic 2-2 interaction are often written in terms of Mandelstam variables. The momenta in the center of mass frame can be written
+$$k_1=(E,0,0,p),\quad k'_1=(E,p\sin\theta,0,p\cos\theta),\quad k_2=(E,0,0,-p),\quad k'_2=(E,-p\sin\theta,0,-p\cos\theta),$$
+where $\theta$ is the scattering angle. We now write the definition of the Mandelstam variables and write them in terms of $E$, $p$, and $\theta$:
 \begin{align*}
-    A_{pp\to pp}=-i\lambda^2\left(\frac 1{t-m^2}+\frac 1{u-m^2}\right),\quad A_{p\overline p\to p\overline p}=-i\lambda^2\left(\frac 1{t-m^2}+\frac 1{s-m^2}\right).
+    s&=(k_1+k_2)^2=4E^2=E_T^2;\\
+    t&=(k_1-k'_1)^2=-4p^2\sin^2\left(\frac\theta 2\right)=-\mathbf q'^2\\
+    u&=(k_1-k'_2)^2=-4p^2\cos^2\left(\frac\theta 2\right)=-\mathbf q_c^2,
 \end{align*}
-
-Note that amplitudes should stay the same for $A_{if}=A_{\overline f\overline i}$.
+where $E_T$ is the total energy, $\mathbf q$ is the momentum transfer from $p_1$ to $p'_1$ and $\mathbf q_c$ is the momentum transfer in the cross channel. Note that $s,t,u$ are not independent; $s+t+u=4m^2$.
 
 \subsection{$\phi^3$ Theory}
 
+\subsubsection{$\phi\phi\to\phi\phi$}
+
 \begin{figure}[h]
+    \centering
     \resizebox{.95\linewidth}{!}
     {
     \begin{feynman}
@@ -745,14 +742,41 @@ Note that amplitudes should stay the same for $A_{if}=A_{\overline f\overline i}
   \label{3.2-ff-ff}
 \end{figure}
 
-\example Consider the $\lambda^2$ order 2-2 scattering in $\phi^3$ theory with identical particles, as shown in figure \ref{3.2-ff-ff}. The total scattering amplitude is 
-$$i\mathcal M_{\phi\phi\to\phi\phi}=(-i\lambda)^2\cdot i\left(\frac{1}{(k_1+k_2)^2-m^2+i\epsilon}+\frac{1}{(k_1-k'_1)^2-m^2+i\epsilon}+\frac 1{(k_1-k'_2)^2-m^2+i\epsilon}\right).$$
+The total scattering amplitude for the $\phi\phi\to\phi\phi$ interaction is 
+\begin{align*}
+    i\mathcal M_{\phi\phi\to\phi\phi}&=(-i\lambda)^2\cdot i\left(\frac{1}{(k_1+k_2)^2-m^2+i\epsilon}+\frac{1}{(k_1-k'_1)^2-m^2+i\epsilon}+\frac 1{(k_1-k'_2)^2-m^2+i\epsilon}\right)\\
+    &=-i\lambda^2\left(\frac 1{s-m^2}+\frac 1{t-m^2}+\frac 1{u-m^2}\right).
+\end{align*}
+It is made explicit in this form that this interaction has a crossing symmetry.
 
 \subsection{$\phi^4$ Theory}
 
 \subsection{Yukawa Theory}
 
+\subsection{QED}
 
+\subsubsection{$e^+e^-\to e^+e^-$, Bhabha Scattering}
+
+\begin{figure}[h]
+    \centering
+    \resizebox{.25\linewidth}{!}
+    {
+    \begin{feynman}
+        \fermion[showArrow=true, flip=true]{8.00, 6.00}{9.00, 4.00}
+        \electroweak[]{5.00, 6.00}{8.00, 6.00}
+        \fermion[showArrow=true, flip=true]{5.00, 6.00}{4.00, 8.00}
+        \fermion[]{8.00, 6.00}{9.00, 8.00}
+        \fermion[showArrow=true, flip=true]{4.00, 4.00}{5.00, 6.00}
+    \end{feynman}        
+    }
+  \caption{The tree-level diagram for the $e^+e^-\to\mu^+\mu^-$ interaction in QED}
+\end{figure}
+
+\subsubsection{$e^-e^-\to e^-e^-$, Moller Scattering}
+
+\subsubsection{$e^-\gamma\to e^-\gamma$, Compton Scattering}
+
+\subsubsection{$e^+e^-\to 2\gamma$, Pair Annihilation}
 
 \pagebreak
 
