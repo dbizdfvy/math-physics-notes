@@ -782,25 +782,18 @@ It is made explicit in this form that this interaction has a crossing symmetry.
 
 \section{Formalisms}
 
-\subsection{Unitarity}
+\subsection{Optical Theorem}
 \textcolor{red}{Lec. 16-17}
 
-One consequence of the unitarity of $S$ is the \textbf{optical theorem}. We have 
-$$S=\mathbbm 1+iT\implies T-T^\dag=iTT^\dag=iT^\dag T,$$
-where $T=(2\pi)^4\delta(k_f-k_i)A_{fi}.$ Inserting the completeness identity and taking the transistional amplitude, we obtain 
-$$T_{fi}-T^*_{if}=i\sum_nT_{fn}T^*_{in}=i\sum_nT^*_{nf}T_{ni},$$
-where $T^\dag_{fi}=T^*_{if}$. With the delta identity $\delta(k_n-k_f)\delta(k_n-k_i)=\delta(k_i-k_f)\delta(k_i-k_n)$ and $i=f$ (this condition is known as forward scattering), we obtain
+The optical theorem is a consequence of the unitarity of the S-matrix. We have, 
 \begin{equation}
-    \frac 1{2i}(A_{ii}-A^*_{ii})=\Im A_{ii}=\frac 12\sum_n(2\pi)^4\delta(k_i-k_f)\abs{A_{in}}^2=\frac 12\sum_n\int\abs{A_{in}}^2D^{(n)}.
+    S=1+iT\implies S^\dag S=1=(1-iT^\dag)(1+iT)\implies -i(T-T^\dag)=T^\dag T.
 \end{equation}
-\example For a 2-2 scattering, $\Im A_{ii}=2k_iE_\text{tot}D_\text{tot}.$
-
-Using the optical theorem, we can examine \textbf{poles} in scattering amplitudes, which correspond to 1-particle intermediate state (hence, $n=1$). Using the optical theorem, 
+This allows us to write, for forward scattering,
 \begin{align*}
-    A_{fi}-A^*_{if}=i\int\frac{\dd^4k}{(2\pi)^3}\delta(k^2-m^2)(2\pi)^4\delta(p_i-k)\bra fA\ket k\bra kA^\dag\ket i=2\pi i\delta(p_i^2-m^2)\bra fA\ket{p_i}\bra{p_i}A^\dag\ket i,
+    \bra{\mathbf k_1\mathbf k_2}T^\dag T\ket{\mathbf k_1\mathbf k_2}&=\sum_n\left(\prod^n_{i=1}\int\frac{\dd^3q_i}{(2\pi)^32E_i}\abs{\bra{\mathbf k_1\mathbf k_2}T^\dag\ket{\{\mathbf q_i\}}}^2\right)\\
+    \implies \Im \mathcal M(k_1,k_2\to k_1,k_2)&=2E_\text{cm}p_\text{cm}\sigma_\text{tot}(k_1,k_2\to\text{anything}).
 \end{align*}
-where we have used $\mathbbm 1=\int\frac{\dd^4k}{(2\pi)^3}\delta(k^2-m^2)\bra k\ket k$ for 1-particle states. Using $\lim_{\epsilon\to 0}\left(\frac 1{x+i\epsilon}-\frac 1{x-i\epsilon}\right)=-2\pi i\delta(x)$, we have 
-$$A_{fi}=\Delta(p_i)\bra fA\ket{p_i}\bra{p_i}A^\dag\ket i\implies\Delta(k)=\pm\frac 1{k^2-m^2+i\epsilon}.$$
 
 \example Consider a creation process $m_1+m_2\to m_3$. There is a pole at $s^2-m_3^2$. This is known as \textbf{resonance production}.
 
@@ -869,6 +862,11 @@ Feynman parametrization is given as
 \begin{equation}
     \frac 1{A_1\cdots A_n}=\int^1_0\dd x_1\cdots\dd x_n\cdot\delta\left(\sum x_i-1\right)\frac{(n-1)!}{\left(x_1A_1+\cdots+x_nA_n\right)^n}.
 \end{equation}
+For repeated elements, we have 
+\begin{equation}
+    \frac 1{A^{m_1}_1A^{m_2}_2\cdots A^{m_n}_n}=\int^1_0\dd x_1\cdots\dd x_n\delta\left(\sum x_i-1\right)\frac{\prod x_i^{m_i-1} }{}
+\end{equation}
+
 $d$ dimensional volume element is given as (assuming isotropy)
 \begin{equation}
     \dd^dk=\Omega_{d-1}k^{d-1}\dd k=\frac{2\pi^{d/2}}{\Gamma(d/2)}k^{d-1}\dd k.
