@@ -537,9 +537,9 @@ In other words,
 $$\ket\psi_\text{in}=\lim_{t\to-\infty}e^{iHt}e^{-iH_0t}\ket\psi,\quad\ket\psi_\text{out}=\lim_{t\to\infty}e^{iHt}e^{-iH_0t}\ket\psi.$$
 We're interested in scattering amplitudes, defined as the probability of measuring $\ket\chi_\text{out}$ given an in state $\ket\psi_\text{in}$. We have 
 $$\braket{\chi_\text{out}}{\psi_\text{in}}=\lim_{t'\to-\infty}\lim_{t\to\infty}\bra\chi U(t,t')\ket\psi=S_{\chi\psi},$$
-where we define $S=\lim_{t,t\to\pm\infty}U(t,t')$, which is also called the $S$ or scattering matrix. The $S$-matrix is unitary; $S^\dag S=\mathbbm 1$, and commutes with/preserves free energy; $\comm{S}{H_0}=0$. Therefore, 
+where we define $S=\lim_{t,t\to\pm\infty}U(t,t')$, which is also called the scattering matrix. The $S$-matrix is unitary; $S^\dag S=\mathbbm 1$, and commutes with/preserves free energy; $\comm{S}{H_0}=0$. Therefore, 
 \begin{equation}
-    S=T\exp\left[i\int^\infty_{-\infty}\dd^4x\mathcal L(\Phi_I)\right].
+    S=T\exp\left[-i\int^\infty_{-\infty}\dd^4x\,H\right].
 \end{equation}
 This is known as Dyson's equation. 
 
