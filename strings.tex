@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{yehyun}
+
+\author{Yehyun Choi}
+\title{Notes on Polchinski's String Theory}
+
+\begin{document}
+
+\maketitle
+
+\section{A first look at strings}
+
+We start by reviewing the action of a point-like particle. If we let $X^\mu(\tau)$ be a parametrization of the particle's worldline, the simplest Poincare-invariant action is 
+\begin{equation}
+    S_\text{pp}=-m\int\dd\tau(-\dot X^\mu\dot X_\mu)^{1/2}\implies\delta S_\text{pp}=-m\int\dd\tau\dot u_\mu\delta X^\mu,\quad u^\mu=\dot X^\mu(-\dot X^\nu\dot X_\nu)^{-1/2}.
+\end{equation}
+Evidently, the equation of motion is $\dot u^\mu=0$. If we let the world-line metric be $\gamma_{\tau\tau}(\tau)$ and define $\eta(\tau)=(-\gamma_{\tau\tau})^{1/2}$, then 
+\begin{equation}
+    S'_\text{pp}=\frac 12\int\dd\tau\left(\eta^{-1}\dot X^\mu\dot X_\mu-\eta m^2\right)\implies\eta^2=-\dot X^\mu\dot X_\mu/m^2.
+\end{equation}
+From the equation of motion, we find $S'=S$.
+
+\end{document}
